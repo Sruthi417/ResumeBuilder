@@ -14,7 +14,7 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  const Auth = () => {
+  
     const { auth}=usePuterStore();
     const location=useLocation();
     const navigate=useNavigate();
@@ -22,7 +22,7 @@ export default function Home() {
     useEffect(()=>{
         if(!auth.isAuthenticated) navigate('/auth?next=/');
     },[auth.isAuthenticated]);
-  };
+  
 
   
 

@@ -29,9 +29,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
   const {init}=usePuterStore();
 
-  useEffect(()=>{
-    init()
-  },[init]);
+ useEffect(() => {
+  usePuterStore.getState().init();
+}, []);
   
   return (
     <html lang="en">

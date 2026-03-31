@@ -94,42 +94,41 @@ const Upload = () => {
        handleAnalyze({companyName,jobTitle,jobDescription,file})
     }
   return (
-     <main className="bg-[url('/images/bg-main.svg')] bg-cover">
+     <main className="bg-[url('/images/bg-main.svg')] bg-cover min-h-screen">
     <section className="main-section">
       <Navbar/>
-      <div className="page-heading py-16 ">
+      <div className="page-heading py-12 md:py-16">
         <h1>Smart feedback for your dream job</h1>
         {isProcessing?(
-            <>
+            <div className="flex flex-col items-center gap-6 w-full">
             <h2>{statusText}</h2>
-            <img src="/images/resume-scan.gif" className='w-full'/>
-            </>
+            <img src="/images/resume-scan.gif" className='w-full max-w-lg rounded-2xl shadow-lg' alt="Processing..."/>
+            </div>
         ):(
             <h2>Drop your resume for an ATS score and improvement tips</h2>
         )}
 
         {!isProcessing && (
-            <form id="upload-form" onSubmit={handleSubmit} className='flex flex-col gap-4 mt-8'>
+            <form id="upload-form" onSubmit={handleSubmit} className='mt-8'>
                 <div className='form-div'>
                     <label htmlFor='company-name'>Company Name</label>
-                    <input type="text" name="company-name" placeholder="Company Name" id="company-name"/>
+                    <input type="text" name="company-name" placeholder="Enter company name" id="company-name" required/>
                 </div>
                 <div className='form-div'>
                     <label htmlFor='job-title'>Job Title</label>
-                    <input type="text" name="job-title" placeholder="Job Title" id="job-title"/>
+                    <input type="text" name="job-title" placeholder="Enter job title" id="job-title" required/>
                 </div>
                 <div className='form-div'>
-                    <label htmlFor='job-description'>Job Descriptione</label>
-                    <textarea rows={5} name="job-description" placeholder="Job Description" id="job-description"/>
+                    <label htmlFor='job-description'>Job Description</label>
+                    <textarea rows={5} name="job-description" placeholder="Paste job description here" id="job-description" required/>
                 </div>
                 <div className='form-div'>
-                    <label htmlFor='uploader'>Upload Resume</label>
+                    <label>Upload Resume</label>
                     <FileUploader onFileSelect={handleFileSelect}/>
                 </div>
-                <button className='primary-button' type="submit">
+                <button className='primary-button text-lg py-4 mt-4' type="submit">
                     Analyze Resume 
                 </button>
-
             </form>
         )}
       </div>

@@ -44,40 +44,37 @@ export default function Home() {
 
   
 
-  return <main className="bg-[url('/images/bg-main.svg')] bg-cover">
+  return <main className="bg-[url('/images/bg-main.svg')] bg-cover min-h-screen">
     <section className="main-section">
       <Navbar/>
-      <div className="page-heading py-16">
+      <div className="page-heading py-12 md:py-16">
         <h1>Track your Application and Resume Rating</h1>
         {!loadingResumes && resumes?.length===0?(
-          <h2>No resumes found.Upload your first resume to get feedback</h2>
+          <h2>No resumes found. Upload your first resume to get feedback</h2>
         ):(
         <h2>Review your submissions and check AI powered feedback</h2>
         )}
       </div>
 
       {loadingResumes && (
-        <div className="flex flex-col items-center justify-center">
-          <img src="/images/resume-scan-2.gif" className="w-[200px]"/>
-          </div>
+        <div className="flex flex-col items-center justify-center py-10">
+          <img src="/images/resume-scan-2.gif" className="w-48 h-48 sm:w-64 sm:h-64" alt="Loading..."/>
+        </div>
       )}
    
 
   {!loadingResumes && resumes.length > 0 &&(
-  <div className="resume-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-
-  {resumes.map((Resume) => (
-  <ResumeCard key={Resume.id} resume={Resume}/>
-    
- 
-))}
- </div>
+  <div className="resumes-section">
+  {resumes.map((resume) => (
+    <ResumeCard key={resume.id} resume={resume}/>
+  ))}
+  </div>
 )}
 
 
 {!loadingResumes && resumes?.length===0 &&(
-  <div className="flex flex-col item-center justify-center mt-10 gap-4">
-    <Link to="/upload" className="primary-button w-fit text-xl font-semibold">
+  <div className="flex flex-col items-center justify-center mt-6">
+    <Link to="/upload" className="primary-button max-w-xs text-xl font-semibold">
     Upload Resume</Link>
   </div>
 )}

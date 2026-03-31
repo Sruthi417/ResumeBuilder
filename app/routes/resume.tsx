@@ -54,31 +54,32 @@ const Resume = () => {
     },[id])
 
   return (
-    <main className='!pt-0'>
-        <nav className='"resume-nav'>
+    <main className='!pt-0 min-h-screen bg-gray-50'>
+        <nav className='resume-nav'>
             <Link to ="/" className="back-button">
-            <img src="/icons/back.svg" alt="logo" className='="w-2.5 h-2.5'/>
-            <span className='text-gray-800 text-sm font-semibold'>Back to Home Page</span>
+            <img src="/icons/back.svg" alt="back" className='w-2.5 h-2.5'/>
+            <span className='text-gray-800 text-sm font-semibold'>Back to Home</span>
             </Link>
         </nav>
 
-        <div className='flex flex-row max-lg:flex-col-reverse'>
-            <section className="feedback-section bg-[url('/images/bg-small.svg')] bg-cover h-[100vh] sticky top-0 flex items-center justify-center">
+        <div className='flex flex-col lg:flex-row'>
+            <section className="w-full lg:w-1/2 lg:sticky lg:top-16 lg:h-[calc(100vh-64px)] flex items-center justify-center p-4 sm:p-8 bg-[url('/images/bg-small.svg')] bg-cover">
                 {imageUrl && resumeUrl && (
-                    <div className=' animate-in fade-in duration-1000 gradient-border max-sm:m-0 h-[90%] max-wxl:h-fit w-fit'>
-                       <a href={resumeUrl} target="_blank" rel="noopener noreferrer">
+                    <div className='animate-in fade-in duration-1000 gradient-border w-full max-w-2xl aspect-[1/1.4] lg:h-[90%]'>
+                       <a href={resumeUrl} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
                         <img
                         src={imageUrl}
-                        className='w-full h-full object-contain rounded-2xl'
-                        title="resume"/>
+                        className='w-full h-full object-contain rounded-2xl shadow-xl'
+                        title="resume"
+                        alt="Resume Preview"/>
                        </a>
                     </div>
                 )}
                 
             </section>
 
-             <section className='feedback-section'>
-                <h2 className="text-4xl !text-black font-bold">Resume Review</h2>
+             <section className='w-full lg:w-1/2 flex flex-col gap-8 p-4 sm:p-8'>
+                <h2 className="text-3xl sm:text-4xl !text-black font-bold text-left">Resume Review</h2>
                 {feedback?(
                     <div className="flex flex-col gap-8 animate-in fade-in duration-1000">
                        <OverView feedback={feedback}/>
@@ -86,10 +87,11 @@ const Resume = () => {
                        <Details feedback={feedback}/>
                     </div>
                 ):(
-                    <img src="/images/resume-scan-2.gif" className='w-full h-full '/>
+                    <div className="flex items-center justify-center py-20">
+                        <img src="/images/resume-scan-2.gif" className='w-48 h-48 sm:w-64 sm:h-64' alt="Scanning..."/>
+                    </div>
                 )}
              </section>
-
         </div>
     </main>
   )

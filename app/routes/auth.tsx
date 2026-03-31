@@ -19,28 +19,28 @@ const Auth = () => {
     )
 
   return (
-    <main className="bg-[url('/images/bg-main.svg')] bg-cover min-h-screen flex items-center justify-center">
-        <div className="gradient-border shadow-lg">
-            <section className="flex flex-col gap-8 bg-white rounded-2xl p-10">
-                <div className="flex flex-col items-center gap-2 text-center">
-                    <h1>welcome</h1>
-                    <h2>Log in to continue your Job Journey</h2>
+    <main className="bg-[url('/images/bg-main.svg')] bg-cover min-h-screen flex items-center justify-center p-4">
+        <div className="gradient-border shadow-2xl w-full max-w-xl">
+            <section className="flex flex-col gap-10 bg-white rounded-2xl p-6 sm:p-12">
+                <div className="flex flex-col items-center gap-4 text-center">
+                    <h1 className="text-5xl sm:text-7xl">welcome</h1>
+                    <h2 className="text-lg sm:text-2xl text-gray-500 font-medium">Log in to continue your Job Journey</h2>
                 </div>
-                <div>
+                <div className="w-full flex justify-center">
                     {isLoading?(
-                        <button className='auth-button animate-pulse'>
-                            <p>signing you in...</p>
+                        <button className='auth-button animate-pulse flex items-center justify-center'>
+                            <span>signing you in...</span>
                         </button>
                     ) :(
-                        <>
+                        <div className="w-full flex justify-center">
                         {auth.isAuthenticated?(
                             <button className="auth-button" onClick={auth.signOut}>
-                                <p>Log Out</p>
-                                </button>
+                                Log Out
+                            </button>
                         ):(<button className="auth-button" onClick={auth.signIn}>
-                                <p>LogIn</p>
-                                </button>)}
-                        </>
+                                LogIn
+                            </button>)}
+                        </div>
                     )}
                 </div>
             </section>

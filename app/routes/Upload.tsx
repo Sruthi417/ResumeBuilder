@@ -25,6 +25,11 @@ const Upload = () => {
    }
 
    const handleAnalyze=async({companyName,jobTitle,jobDescription,file}:{companyName:string, jobTitle:string,jobDescription:string,file:File})=>{
+    // Validate file is PDF
+    if (file.type !== "application/pdf") {
+      return setStatusText('Error: Please upload a valid PDF file');
+    }
+    
     setIsProcessing(true);
     setStatusText('uploading the file...');
     const uploadedFile=await fs.upload([file])

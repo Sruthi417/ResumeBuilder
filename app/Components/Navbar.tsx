@@ -1,16 +1,53 @@
-import { Link } from "react-router"
+import { Link, NavLink } from "react-router";
+import "./Navbar.scss";
 
-const Navbar = () => {
-  return (
-    <nav className="navbar">
-    <Link to="/">
-        <p className="text-2xl font-bold  text-gradient">RESMIND</p>
-    </Link>
-    <Link to="/upload" className="primary-button w-fit">
-    Upload Resume
-    </Link>
-    </nav>
-  )
+interface NavbarProps {
+  uploadedResumes?: Resume[];
 }
 
-export default Navbar
+const Navbar = ({ uploadedResumes = [] }: NavbarProps) => {
+  const hasResumes = uploadedResumes.length > 0;
+
+  return (
+    <nav className={`navbar ${hasResumes ? "navbar--has-resumes" : ""}`}>
+      <Link to="/" className="navbar__logo">
+        RESMIND
+      </Link>
+
+      <div className="navbar__links">
+        <NavLink
+          to="/features"
+          className={({ isActive }) =>
+            `navbar__link ${isActive ? "active" : ""}`
+          }
+        >
+          Features
+        </NavLink>
+
+        {hasResumes && (
+          <a href="#resumes" className="navbar__link">
+            Resumes
+          </a>
+        )}
+
+        <NavLink
+          to="/testimonials"
+          className={({ isActive }) =>
+            `navbar__link ${isActive ? "active" : ""}`
+          }
+        >
+          Testimonials
+        </NavLink>
+      </div>
+
+      <Link to="/upload" className="navbar__action">
+        Analyze Resume
+        {/* <span className="navbar__arrow" aria-hidden="true">
+          -&gt;
+        </span> */}
+      </Link>
+    </nav>
+  );
+};
+
+export default Navbar;

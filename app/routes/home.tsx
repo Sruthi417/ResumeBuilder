@@ -46,7 +46,7 @@ export default function Home() {
 
   return <main className="bg-[url('/images/bg-main.svg')] bg-cover min-h-screen">
     <section className="main-section">
-      <Navbar/>
+      <Navbar uploadedResumes={resumes}/>
       <div className="page-heading py-12 md:py-16">
         <h1>Track your Application and Resume Rating</h1>
         {!loadingResumes && resumes?.length===0?(
@@ -64,7 +64,7 @@ export default function Home() {
    
 
   {!loadingResumes && resumes.length > 0 &&(
-  <div className="resumes-section">
+  <div className="resumes-section" id="resumes">
   {resumes.map((resume) => (
     <ResumeCard key={resume.id} resume={resume}/>
   ))}

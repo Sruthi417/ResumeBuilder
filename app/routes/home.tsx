@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from "react-router";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 import Hero from "~/Components/Hero";
+import UploadedResume from "../Components/UploadedResume";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -47,16 +48,9 @@ export default function Home() {
         <Navbar uploadedResumes={resumes} />
         <Hero />
 
-        {/* <div className="page-heading py-12 md:py-16">
-        <h1>Track your Application and Resume Rating</h1>
-        {!loadingResumes && resumes?.length===0?(
-          <h2>No resumes found. Upload your first resume to get feedback</h2>
-        ):(
-        <h2>Review your submissions and check AI powered feedback</h2>
-        )}
-      </div> */}
+        
 
-        {loadingResumes && (
+        {/* {loadingResumes && (
           <div className="flex flex-col items-center justify-center py-10">
             <img
               src="/images/resume-scan-2.gif"
@@ -72,7 +66,12 @@ export default function Home() {
               <ResumeCard key={resume.id} resume={resume} />
             ))}
           </div>
-        )}
+        )} */}
+
+        <UploadedResume
+  resumes={resumes}
+  loadingResumes={loadingResumes}
+/>
 
         {!loadingResumes && resumes?.length === 0 && (
           <div className="flex flex-col items-center justify-center mt-6">

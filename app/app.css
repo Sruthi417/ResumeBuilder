@@ -18,68 +18,10 @@
   --color-badge-yellow-text: #73321b;
 }
 
-html,
-body {
-  @apply bg-white;
-}
 
-main {
-  @apply min-h-screen pt-10;
-}
-h1 {
-  @apply text-4xl sm:text-5xl md:text-6xl text-gradient leading-tight xl:tracking-[-2px] font-semibold text-center;
-}
-
-h2 {
-  @apply text-xl sm:text-2xl md:text-3xl text-dark-200 text-center;
-}
-
-label {
-  @apply text-dark-200 font-medium;
-}
-input {
-  @apply w-full p-4 inset-shadow rounded-2xl focus:outline-none bg-white transition-all;
-}
-
-textarea {
-  @apply w-full p-4 inset-shadow rounded-2xl focus:outline-none bg-white transition-all;
-}
-
-form {
-  @apply flex flex-col items-stretch gap-6 w-full max-w-2xl mx-auto;
-}
 
 @layer components {
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#AB8C95] via-[#000000] to-[#8E97C5];
-  }
-  .gradient-border {
-    @apply bg-gradient-to-b from-light-blue-100 to-light-blue-200 p-4 rounded-2xl;
-  }
-  .primary-button {
-    @apply primary-gradient text-white rounded-full px-6 py-3 cursor-pointer w-full text-center font-semibold transition-transform active:scale-95;
-  }
-  .resume-nav {
-    @apply flex flex-row justify-between items-center p-4 border-b border-gray-200 bg-white sticky top-0 z-10;
-  }
-  .resume-summary {
-    @apply flex flex-col md:flex-row items-center justify-center p-4 gap-4;
-    .category {
-      @apply flex flex-row gap-2 items-center bg-gray-50 rounded-2xl p-4 w-full justify-between;
-    }
-  }
-  .back-button {
-    @apply flex flex-row items-center gap-2 border border-gray-200 rounded-lg p-2 shadow-sm bg-white hover:bg-gray-50;
-  }
-  .auth-button {
-    @apply primary-gradient rounded-full py-4 px-8 cursor-pointer w-full sm:max-w-[600px] text-2xl sm:text-3xl font-semibold text-white transition-transform active:scale-95;
-  }
-  .main-section {
-    @apply flex flex-col items-center gap-8 pt-12 px-4 sm:px-8 md:px-15 pb-10 w-full;
-  }
-  .page-heading {
-    @apply flex flex-col items-center gap-4 sm:gap-8 max-w-4xl text-center w-full;
-  }
+ 
   .resumes-section {
     @apply grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 w-full max-w-[1400px] mx-auto;
     scroll-margin-top: 120px;

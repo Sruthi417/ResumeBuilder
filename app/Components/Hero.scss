@@ -1,7 +1,7 @@
 /* =========================================================
    HERO
    ========================================================= */
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 .hero {
   position: relative;
 
@@ -233,11 +233,11 @@ margin-top: -3rem;
 
   font-size: clamp(48px, 4.6vw, 56px);
 
-  font-weight: 500;
+  font-weight: 400;
+font-family: 'Inter', sans-serif;;
+  line-height: 0.9;
 
-  line-height: 1;
-
-  letter-spacing: 0;
+  letter-spacing: -1.5px;
 
   text-align: left;
 }

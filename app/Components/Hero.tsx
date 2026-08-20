@@ -28,11 +28,8 @@ const Hero = () => {
     restDelta: 0.001,
   });
 
-  // Tilt only — no scale. Layering a scale animation on top of rotateX
-  // doubled up with the perspective foreshortening (rotating toward flat
-  // already makes it read as "growing"), which is what made it look like
-  // it was stretching instead of just straightening.
-  const rotateX = useTransform(progress, [0, 0.85], [40, 0]);
+
+  const rotateX = useTransform(progress, [0, 0.85], [30, 0]);
 
   const containerVariants: Variants = {
     hidden: {

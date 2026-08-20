@@ -28,8 +28,11 @@ const Hero = () => {
     restDelta: 0.001,
   });
 
-  const rotateX = useTransform(progress, [0, 0.85], [28, 0]);
-  const scale = useTransform(progress, [0, 0.85], [0.96, 1]);
+  // Tilt only — no scale. Layering a scale animation on top of rotateX
+  // doubled up with the perspective foreshortening (rotating toward flat
+  // already makes it read as "growing"), which is what made it look like
+  // it was stretching instead of just straightening.
+  const rotateX = useTransform(progress, [0, 0.85], [40, 0]);
 
   const containerVariants: Variants = {
     hidden: {
@@ -170,7 +173,13 @@ const Hero = () => {
 
           {/* PROOF */}
 
-          <div className="hero__proof">
+<motion.div
+  className="hero__proof"
+  variants={itemVariants}
+  initial="hidden"
+  animate="show"
+>
+  
             <p>
               AI resume insights built to simplify applications and make every
               submission stronger.
@@ -181,7 +190,7 @@ const Hero = () => {
 
               <strong>4.8 rated by job seekers</strong>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
 
@@ -189,12 +198,14 @@ const Hero = () => {
           DASHBOARD
       ===================================================== */}
 
-      <div className="hero__dashboard-wrapper">
+      <motion.div className="hero__dashboard-wrapper"
+       variants={itemVariants}
+  initial="hidden"
+  animate="show">
         <motion.div
           className="hero__dashboard"
           style={{
             rotateX,
-            scale,
           }}
         >
           <img
@@ -202,7 +213,7 @@ const Hero = () => {
             alt="ResMind ATS resume analysis dashboard"
           />
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 };

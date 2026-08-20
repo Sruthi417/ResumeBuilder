@@ -17,19 +17,28 @@ const logos = [
 const Hero = () => {
   const heroRef = useRef<HTMLElement | null>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end end"],
-  });
+const { scrollYProgress } = useScroll({
+  target: heroRef,
+  offset: ["start start", "end end"],
+});
 
-  const progress = useSpring(scrollYProgress, {
-    stiffness: 90,
-    damping: 28,
-    restDelta: 0.001,
-  });
+const progress = useSpring(scrollYProgress, {
+  stiffness: 90,
+  damping: 28,
+  restDelta: 0.001,
+});
 
+const rotateX = useTransform(
+  progress,
+  [0, 0.85],
+  [14, 0]
+);
 
-  const rotateX = useTransform(progress, [0, 0.85], [30, 0]);
+const scale = useTransform(
+  progress,
+  [0, 0.85],
+  [0.985, 1]
+);
 
   const containerVariants: Variants = {
     hidden: {
@@ -170,13 +179,13 @@ const Hero = () => {
 
           {/* PROOF */}
 
-<motion.div
-  className="hero__proof"
-  variants={itemVariants}
-  initial="hidden"
-  animate="show"
->
-  
+          <motion.div
+            className="hero__proof"
+            variants={itemVariants}
+            initial="hidden"
+            animate="show"
+          >
+
             <p>
               AI resume insights built to simplify applications and make every
               submission stronger.
@@ -196,13 +205,14 @@ const Hero = () => {
       ===================================================== */}
 
       <motion.div className="hero__dashboard-wrapper"
-       variants={itemVariants}
-  initial="hidden"
-  animate="show">
+        variants={itemVariants}
+        initial="hidden"
+        animate="show">
         <motion.div
           className="hero__dashboard"
           style={{
-            rotateX,
+              rotateX,
+      scale,
           }}
         >
           <img

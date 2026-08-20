@@ -588,7 +588,6 @@ margin-top: -16px;
    Overlap kept small and `.hero__dashboard`'s transform-origin
    is the TOP edge (not the bottom) — see below for why.
    ========================================================= */
-
 .hero__dashboard-wrapper {
   position: relative;
 
@@ -596,14 +595,20 @@ margin-top: -16px;
 
   width: 100%;
 
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding-inline: clamp(1rem, 4vw, 2rem);
+
   margin-top: -40px;
 
   padding-bottom: 100px;
 
+  perspective: 1400px;
+
   pointer-events: none;
 }
-
-
 
 
 .hero__dashboard {
@@ -611,19 +616,17 @@ margin-top: -16px;
 
   width: min(960px, 66vw);
 
-  margin: 0 auto;
+  margin-inline: auto;
 
-  transform-origin: center top;
+  transform-origin: 50% 0%;
 
   transform-style: preserve-3d;
 
-  perspective: 1400px;
-
   will-change: transform;
-   filter:
-  drop-shadow(0 18px 30px rgba(0, 0, 0, 0.14))
-  drop-shadow(0 30px 55px rgba(0, 0, 0, 0.10));
-  
+
+  filter:
+    drop-shadow(0 18px 30px rgba(0, 0, 0, 0.14))
+    drop-shadow(0 30px 55px rgba(0, 0, 0, 0.10));
 }
 
 

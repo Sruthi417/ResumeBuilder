@@ -9,7 +9,7 @@
   padding:
     clamp(2rem, 9vw, 3rem)
     clamp(1.25rem, 4vw, 4rem)
-    clamp(5rem, 9vw, 5rem);
+    clamp(2rem, 9vw, 5rem);
 
   background: #ffffff;
 
@@ -491,6 +491,22 @@
    TABLET
 ========================================================= */
 
+/* =========================================================
+   Below this width, `.features` (the next section) switches to a
+   fixed 4rem top padding sized to be the ENTIRE visible gap between
+   the two sections — so this section's own bottom padding is
+   zeroed out here rather than left to add on top of it.
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  .uploaded-resumes {
+    padding-bottom: 0;
+  }
+
+}
+
+
 @media (max-width: 900px) {
 
   .uploaded-resumes {
@@ -513,11 +529,15 @@
 
 @media (max-width: 600px) {
 
+  /* Bottom stays 0 (set above at ≤760px) — this shorthand only
+     re-touches top/inline; keeping a third value here would
+     silently reintroduce the bottom padding this cascade is meant
+     to remove. */
   .uploaded-resumes {
     padding:
       4rem
       1.25rem
-      5rem;
+      0;
   }
 
   .uploaded-resumes__header {

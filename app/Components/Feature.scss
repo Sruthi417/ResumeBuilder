@@ -14,7 +14,7 @@
   'Inter', sans-serif;
 
   padding:
-    clamp(6rem, 10vw, 3rem)
+    clamp(2rem, 10vw, 3rem)
     clamp(1.25rem, 5vw, 5rem);
 
   overflow: visible;
@@ -457,61 +457,71 @@ border-radius: 25px;
 
 /* =========================================================
    TABLET
-========================================================= */
 
-@media (max-width: 1000px) {
+   Below 992px the two-column layout (sticky selector beside a
+   650px-tall panel stack) feels cramped, so this collapses to a
+   single column instead: heading/subtitle, then the feature cards
+   below them. The selector is removed entirely — it exists to
+   spy-highlight which panel you've scrolled past in the two-column
+   layout, which doesn't apply once everything's just stacked
+   underneath in normal reading order.
 
-  .features__container {
-    grid-template-columns:
-      minmax(230px, 0.7fr)
-      minmax(0, 1.3fr);
+   Each card also switches from an absolutely-positioned image
+   overlaying a fixed-height box (the desktop treatment) to a plain
+   flex column — content, then image, with a real 2rem gap between
+   them instead of a percentage-based overlay position.
+   ========================================================= */
 
-    column-gap: 3rem;
-  }
-
-
-  .features__heading h2 {
-    font-size: 2.5rem;
-  }
-
-
-  .feature-panel {
-    min-height: 570px;
-  }
-
-
-  .feature-panel__visual {
-    left: 4%;
-
-    right: 4%;
-
-    height: 54%;
-  }
-
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 760px) {
-
-  .features {
-    padding:
-      5rem
-      1.25rem
-      6rem;
-  }
-
+@media (max-width: 992px) {
 
   .features__container {
     display: block;
   }
 
 
+  /* `.uploaded-resumes__header`/`.testimonials__header` don't
+     constrain the heading block itself — they center the h2 and p
+     independently, each with its own max-width + `margin: auto`.
+     The previous attempt capped `.features__heading` itself to
+     600px, which centered the container but left the paragraph
+     (base rule: `max-width: 390px; margin: 1.5rem 0 0` — note: not
+     `auto`) sitting flush at that container's LEFT edge, reading as
+     "sidelined" under the now-centered heading. Matching the other
+     two sections' actual pattern fixes that at the root. */
+  .features__eyebrow {
+    display: none;
+  }
+
+  .features__heading {
+    max-width: none;
+
+    text-align: center;
+  }
+
+  .features__heading h2 {
+    max-width: 500px;
+
+    margin: 0 auto;
+
+    /* Same font-size as `.uploaded-resumes__header h2` /
+       `.testimonials__header h2` at this size. */
+    font-size: clamp(48px, 5vw, 56px);
+  }
+
+  .features__heading p {
+    max-width: 500px;
+
+    /* `auto` on the sides is what actually centers the paragraph's
+       own box (not just the text inside it) — `1rem` bottom is the
+       requested extra breathing room below it. */
+    margin: 1.5rem auto 1rem;
+  }
+
+.features__heading h2 span::after {
+  min-height: 14px;
+}
   /*
-   * GSAP pin is disabled on mobile.
+   * GSAP pin is disabled below this width.
    */
 
   .features__left {
@@ -523,49 +533,89 @@ border-radius: 25px;
   }
 
 
-  .features__heading {
-    max-width: 600px;
-  }
-
-
-  .features__heading h2 {
-    font-size:
-      clamp(2.2rem, 9vw, 3.2rem);
-  }
-
-
   .features__selector {
-    max-width: none;
-
-    margin-top: 2rem;
-  }
-
-
-  .features__selector-item {
-    min-height: 3.8rem;
+    display: none;
   }
 
 
   .features__right {
-    gap: 3rem;
+    /* Gap between the stacked cards themselves. */
+    margin-top: 8rem;
+    gap: 2rem;
   }
 
 
   .feature-panel {
-    min-height: 550px;
+    display: flex;
+    flex-direction: column;
 
+    /* Gap between this card's content and its image. */
+    gap: 2rem;
+
+    min-height: auto;
+  }
+
+
+  .feature-panel__content {
+    max-width: none;
+  }
+
+
+  .feature-panel__visual {
+    position: relative;
+
+    left: auto;
+    right: auto;
+    bottom: auto;
+
+    width: 100%;
+    height: auto;
+  }
+
+
+  .feature-panel__image {
+    height: auto;
+    max-height: 360px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 760px) {
+
+  /* The gap above this section is this top padding PLUS
+     `.uploaded-resumes`'s own bottom padding (a separate
+     component) — that one is zeroed out below 760px (see
+     UploadedResume.scss) specifically so this value alone is the
+     whole visible gap. */
+  .features {
+    padding:
+      2rem
+      1.25rem
+      3rem;
+  }
+
+
+  .features__heading h2 {
+    /* Matches `.uploaded-resumes__header h2`'s own mobile clamp. */
+    font-size:
+      clamp(2.2rem, 10vw, 3.2rem);
+  }
+
+
+  .feature-panel {
     padding: 1.5rem;
 
     border-radius: 20px;
   }
 
 
-  .feature-panel__visual {
-    left: 3%;
-
-    right: 3%;
-
-    height: 53%;
+  .feature-panel__image {
+    max-height: 300px;
   }
 
 
@@ -588,8 +638,6 @@ border-radius: 25px;
 
 
   .feature-panel {
-    min-height: 500px;
-
     padding: 1.25rem;
   }
 
@@ -613,12 +661,8 @@ border-radius: 25px;
   }
 
 
-  .feature-panel__visual {
-    left: 2%;
-
-    right: 2%;
-
-    height: 48%;
+  .feature-panel__image {
+    max-height: 260px;
   }
 
 }

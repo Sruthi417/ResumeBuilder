@@ -10,6 +10,7 @@ import Hero from "~/Components/Hero";
 import UploadedResume from "../Components/UploadedResume";
 import Features from "~/Components/Feature";
 import Testimonials from "~/Components/Testimonials";
+import Footer from "~/Components/Footer";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -77,6 +78,7 @@ export default function Home() {
 
 <Features/>
 <Testimonials/>
+<Footer/>
 
         {!loadingResumes && resumes?.length === 0 && (
           <div className="flex flex-col items-center justify-center mt-6">

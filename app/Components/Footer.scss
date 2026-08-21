@@ -1,0 +1,497 @@
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 700px;
+
+  background: #ffffff;
+
+  font-family: "Inter", sans-serif;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   BLUE TOP SECTION
+========================================================= */
+
+.footer__blue {
+  position: absolute;
+
+  top: 0;
+  left: 20px;
+  right: 20px;
+
+  height: 450px;
+
+  border-radius: 42px 42px 0 0;
+
+  overflow: hidden;
+
+  background: linear-gradient(
+    to bottom,
+    #dceeff 0%,
+    #dceeff 18%,
+    #e5f2ff 38%,
+    #edf6ff 58%,
+    #f6faff 78%,
+    #ffffff 100%
+  );
+}
+
+
+/* =========================================================
+   DOT PATTERN
+========================================================= */
+
+.footer__dots {
+  position: absolute;
+
+  inset: 0;
+
+  background-image: radial-gradient(
+    circle,
+    rgba(136, 186, 242, 0.28) 1px,
+    transparent 1.25px
+  );
+
+  background-size: 10px 10px;
+
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.35) 20%,
+    #000 50%,
+    #000 100%
+  );
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.35) 20%,
+    #000 50%,
+    #000 100%
+  );
+}
+
+
+/* =========================================================
+   WHITE INVERTED CONTAINER
+========================================================= */
+
+.footer__container {
+  position: relative;
+
+  z-index: 2;
+
+  width: min(100%, 1320px);
+
+  margin: 90px auto 0;
+
+  padding:
+    clamp(4rem, 7vw, 6rem)
+    clamp(1.5rem, 4vw, 4rem)
+    2rem;
+
+  background: #ffffff;
+
+  border-radius: 42px 42px 0 0;
+
+  box-shadow:
+    0 -15px 50px
+    rgba(80, 130, 190, 0.04);
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.footer__content {
+  display: grid;
+
+  grid-template-columns:
+    1.3fr
+    1fr;
+
+  gap: clamp(4rem, 8vw, 9rem);
+
+  align-items: start;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.footer__brand {
+  position: relative;
+}
+
+
+.footer__logo {
+  margin-bottom: 3rem;
+
+  color: #111317;
+
+  font-size: 2rem;
+
+  font-weight: 600;
+
+  letter-spacing: -0.06em;
+}
+
+
+.footer__brand h2 {
+  margin: 0 0 1rem;
+
+  color: #111317;
+
+  font-size:
+    clamp(1.8rem, 3vw, 2.5rem);
+
+  font-weight: 400;
+
+  line-height: 1.05;
+
+  letter-spacing: -0.045em;
+}
+
+
+/* =========================================================
+   SUBSCRIBE
+========================================================= */
+
+.footer__subscribe {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.8rem;
+
+  width: min(100%, 565px);
+}
+
+
+.footer__subscribe input {
+  flex: 1;
+
+  min-width: 0;
+
+  height: 56px;
+
+  padding: 0 1.25rem;
+
+  border: none;
+
+  outline: none;
+
+  border-radius: 14px;
+
+  background: #f5f5f5;
+
+  color: #111317;
+
+  font-family: inherit;
+
+  font-size: 0.95rem;
+}
+
+
+.footer__subscribe input::placeholder {
+  color: #687386;
+}
+
+
+.footer__subscribe button {
+  height: 56px;
+
+  padding: 0 1.5rem;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background: #111317;
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 0.95rem;
+
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease;
+}
+
+
+.footer__subscribe button:hover {
+//   transform: translateY(-2px);
+
+  background: #252930;
+}
+
+
+/* =========================================================
+   RESMIND BOLD NAME
+========================================================= */
+
+.footer__brand-name {
+  margin-top: 5rem ;
+
+  color: #111317;
+
+  font-size:
+    clamp(2.5rem, 6vw, 5rem);
+
+  font-weight: 700;
+
+  line-height: 0.9;
+
+  letter-spacing: -0.08em;
+}
+
+
+/* =========================================================
+   SOCIALS
+========================================================= */
+
+.footer__socials {
+  display: flex;
+
+  gap: 0.7rem;
+
+  margin-top: 2rem;
+}
+
+
+.footer__socials a {
+  width: 46px;
+
+  height: 46px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 1px solid #eeeeee;
+
+  border-radius: 50%;
+
+  color: #111317;
+
+  text-decoration: none;
+
+  font-size: 1rem;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease;
+}
+
+
+.footer__socials a:hover {
+  transform: translateY(-3px);
+
+  background: #f5f8fc;
+}
+
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+.footer__links {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 2rem;
+}
+
+
+.footer__column {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 1rem;
+}
+
+
+.footer__column h3 {
+  margin: 0 0 0.5rem;
+
+  color: #111317;
+
+  font-size: 0.95rem;
+
+  font-weight: 600;
+}
+
+
+.footer__column a {
+  color: #687386;
+
+  font-size: 0.95rem;
+
+  text-decoration: none;
+
+  transition:
+    color 0.25s ease;
+}
+
+
+.footer__column a:hover {
+  color: #111317;
+}
+
+
+/* =========================================================
+   BOTTOM
+========================================================= */
+
+.footer__bottom {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 2rem;
+
+  margin-top: 6rem;
+
+  padding-top: 1.5rem;
+
+  border-top: 1px solid #eeeeee;
+
+  color: #8a93a3;
+
+  font-size: 0.8rem;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .footer__content {
+    grid-template-columns: 1fr;
+
+    gap: 4rem;
+  }
+
+  .footer__links {
+    max-width: 600px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .footer {
+    min-height: auto;
+  }
+
+
+  .footer__blue {
+    left: 12px;
+    right: 12px;
+
+    height: 250px;
+
+    border-radius: 28px 28px 0 0;
+  }
+
+
+  .footer__container {
+    margin-top: 130px;
+
+    padding:
+      3rem
+      1.25rem
+      1.5rem;
+
+    border-radius: 28px 28px 0 0;
+  }
+
+
+  .footer__logo {
+    margin-bottom: 2rem;
+
+    font-size: 1.7rem;
+  }
+
+
+  .footer__subscribe {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+
+  .footer__subscribe input,
+  .footer__subscribe button {
+    width: 100%;
+  }
+
+
+  .footer__brand-name {
+    margin-top: 4rem;
+
+    font-size: 3rem;
+  }
+
+
+  .footer__links {
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    gap: 2.5rem 1rem;
+  }
+
+
+  .footer__bottom {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    margin-top: 4rem;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+  .footer__links {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}

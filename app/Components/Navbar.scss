@@ -129,6 +129,176 @@ max-width: 150px;
   &__action:hover &__arrow {
     transform: translateX(3px);
   }
+
+  /* =======================================================
+     HAMBURGER / CLOSE TOGGLE
+
+     Hidden by default — only shown past the breakpoint where
+     `&__links` and `&__action` are hidden (see media query
+     below), so it always replaces them rather than sitting
+     alongside them.
+     ======================================================= */
+
+  &__toggle {
+    display: none;
+    flex-shrink: 0;
+
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    min-height: 40px;
+    padding: 0 14px;
+
+    border: 0;
+    border-radius: 12px;
+
+    background: transparent;
+    color: #111111;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  &--open &__toggle {
+    background: #111111;
+    color: #ffffff;
+  }
+
+  &__toggle-icon {
+    font-size: 13px;
+    line-height: 1;
+  }
+
+  &__hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+
+    width: 22px;
+
+    span {
+      display: block;
+      height: 2px;
+
+      border-radius: 2px;
+
+      background: #111111;
+
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+  }
+}
+
+/* =========================================================
+   SCRIM
+
+   Dims the page behind the dropdown menu. Kept in the DOM at
+   all times and toggled with a class (not conditionally
+   rendered) purely so open/close can transition smoothly.
+   ========================================================= */
+
+.navbar__scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 998;
+
+  border: 0;
+  padding: 0;
+
+  background: rgba(10, 10, 10, 0.4);
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity 0.25s ease;
+
+  &--visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* =========================================================
+   DROPDOWN MENU
+
+   Sits just under the navbar pill. Only ever shown at/below
+   the breakpoint where the toggle button itself becomes
+   visible (see media query below) — on desktop widths it
+   stays hidden regardless of `isMenuOpen`, since there's no
+   way to open it there.
+   ========================================================= */
+
+.navbar__menu {
+  position: fixed;
+  top: 100px;
+  right: 12px;
+  left: 12px;
+  z-index: 999;
+
+  display: none;
+  flex-direction: column;
+
+  padding: 10px;
+
+  border-radius: 20px;
+
+  background: #0c0c0c;
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.28),
+    0 4px 14px rgba(0, 0, 0, 0.18);
+
+  opacity: 0;
+  transform: translateY(-8px) scale(0.98);
+  pointer-events: none;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+
+  &--open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+}
+
+.navbar__menu-link {
+  display: block;
+
+  padding: 14px 18px;
+
+  border-radius: 14px;
+
+  color: #ffffff;
+  text-decoration: none;
+  text-align: center;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+
+  transition: background 0.15s ease;
+
+  &:hover,
+  &.active {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  &--primary {
+    margin-top: 4px;
+
+    background: #ffffff;
+    color: #111111;
+
+    &:hover {
+      background: #eaeaea;
+    }
+  }
 }
 
 @media (max-width: 850px) {
@@ -173,18 +343,23 @@ max-width: 150px;
       display: none;
     }
 
+    /* The action button folds into the dropdown menu (as its own
+       highlighted row) instead of sitting in the bar — there isn't
+       room for both it and the toggle once the links are gone too. */
     &__action {
-      min-height: 46px;
-      padding: 0 15px;
-
-      border-radius: 12px;
-
-      font-size: 14px;
-      gap: 10px;
+      display: none;
     }
 
-    &__arrow {
-      font-size: 16px;
+    &__toggle {
+      display: flex;
     }
+  }
+
+  /* Menu/scrim only ever need to exist at this width — the toggle
+     that opens them is hidden above it, so above it `isMenuOpen`
+     can never become visible to the user regardless of React state. */
+  .navbar__scrim,
+  .navbar__menu {
+    display: flex;
   }
 }

@@ -368,12 +368,19 @@ font-family: 'Inter', sans-serif;;
 
 .hero__visual {
   display: flex;
-margin-top: -2rem;
+
+  /* Both are a two-column alignment nudge (pulling the illustration
+     up/left to sit level with the heading beside it) — clamped
+     toward 0 so they ease off as the layout narrows, instead of
+     staying fixed and pulling the illustration up over the content
+     above it once things stack into one column. */
+  margin-top: clamp(-2rem, -4vw, 0rem);
+  padding-right: clamp(0rem, 4vw, 4rem);
+
   align-items: center;
   justify-content: center;
-padding-right:4rem ;
+
   min-height: 240px;
-  
 }
 
 
@@ -429,9 +436,12 @@ padding-right:4rem ;
 .hero__logo-window {
   position: relative;
 
+  /* `margin-inline` alone (no separate fixed `margin-left`) so both
+     sides shrink together — a fixed left override here previously
+     made the strip sit lopsided instead of shrinking symmetrically
+     at narrower widths. */
   margin-inline: clamp(2rem, 8vw, 8rem);
-  margin-left: 5rem;
-margin-top: -16px;
+  margin-top: -16px;
   height: 100px;
 
   overflow: hidden;
@@ -632,6 +642,12 @@ margin-top: -16px;
   .hero__trust-row {
     width: min(1380px, calc(100% - 80px));
   }
+
+   .hero__content {
+    max-width: 600px;
+
+   
+  }
 }
 
 
@@ -640,7 +656,15 @@ margin-top: -16px;
    ========================================================= */
 
 @media (max-width: 1100px) {
+ 
+  .hero {
+    min-height: 125vh;
+  }
+
   .hero__blue-background {
+    top: 63vh;
+    height: calc(37vh + 60px);
+
     right: 14px;
     left: 14px;
 
@@ -658,7 +682,9 @@ margin-top: -16px;
   }
 
   .hero__content {
-    max-width: 780px;
+    max-width: 500px;
+
+    padding-left: 0;
 
     margin: 0 auto;
 
@@ -673,9 +699,16 @@ margin-top: -16px;
 
   .hero__actions {
     justify-content: center;
+
+    
+    margin-bottom: 24px;
   }
 
   .hero__visual {
+    
+    margin-top: 0;
+    padding-right: 0;
+
     min-height: 260px;
   }
 
@@ -693,6 +726,22 @@ margin-top: -16px;
     text-align: center;
 
     padding-bottom: 55px;
+  }
+
+  .hero__logo-window {
+    height: 88px;
+
+    margin-top: -10px;
+  }
+
+  .hero__logo {
+    width: 180px;
+
+    margin-right: 3rem;
+  }
+
+  .hero__logo img {
+    width: 160px;
   }
 
   .hero__proof {
@@ -720,7 +769,15 @@ margin-top: -16px;
    ========================================================= */
 
 @media (max-width: 900px) {
+  .hero {
+    padding-top: 3rem;
+    min-height: 135vh;
+  }
+
   .hero__blue-background {
+    top: 60vh;
+    height: calc(40vh + 50px);
+
     right: 10px;
     left: 10px;
 
@@ -735,6 +792,20 @@ margin-top: -16px;
     width: 100%;
 
     padding-top: 40px;
+  }
+
+  .hero__logo-window {
+    height: 80px;
+  }
+
+  .hero__logo {
+    width: 195px;
+
+    margin-right: 2.5rem;
+  }
+
+  .hero__logo img {
+    width: 195px;
   }
 
   .hero__dashboard-wrapper {
@@ -756,13 +827,13 @@ margin-top: -16px;
     min-height: 100vh;
   }
 
+
   .hero__blue-background {
-    top: 55vh;
+    top: 84vh;
+    height: calc(16vh + 140px);
 
     right: 8px;
     left: 8px;
-
-    height: 45vh;
 
     border-radius: 0 0 28px 28px;
   }
@@ -793,34 +864,43 @@ margin-top: -16px;
   .hero__content h1 .highlight-word::after {
     left: -4px;
     right: -4px;
-    bottom: 5px;
-    height: 10px;
+    bottom: 1px;
+    height: 14px;
   }
 
+  /* Row, not stacked — matches the reference (both buttons stay
+     side by side even at phone widths) — with a firm margin-bottom
+     so the illustration below always has clearance and never
+     creeps up over them. */
   .hero__actions {
-    width: 100%;
-
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
 
     margin-top: 26px;
+    margin-bottom: 22px;
   }
 
   .hero__primary-button,
   .hero__secondary-button {
-    width: 100%;
+    min-height: 48px;
 
-    min-height: 50px;
+    padding: 0 16px;
 
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .hero__visual {
+    margin-top: 0;
+    padding-right: 0;
+
     min-height: 180px;
   }
 
   .hero__video {
     width: min(100%, 320px);
   }
+
+  
 
 
   /* ------------------------------
@@ -835,22 +915,25 @@ margin-top: -16px;
     gap: 18px;
   }
 
+  /* `height`, not `min-height` — the base rule sets an explicit
+     `height: 100px` on `.hero__logo-window`, and `min-height` can
+     never shrink something below its own explicit `height`, so this
+     was previously a no-op and the strip stayed pinned at 100px
+     tall (with the mask cropping most of each logo out of view,
+     reading as "tiny"). A real, slightly larger size here — logos
+     included — actually shows enough of each mark to be legible. */
   .hero__logo-window {
-    min-height: 55px;
-  }
-
-  .hero__logos {
-    min-height: 55px;
+    height: 64px;
   }
 
   .hero__logo {
-    width: 140px;
-
-    margin-right: 16px;
+    width: 190px;
+margin-bottom: 16px;
+    margin-right: 2rem;
   }
 
   .hero__logo img {
-    max-width: 110px;
+    width: 190px;
   }
 
   .hero__proof p {
@@ -880,12 +963,13 @@ margin-top: -16px;
 
   .hero__dashboard {
     width: 120vw;
-
-    margin-left: -10vw;
+ box-shadow: none;
+    // margin-left: -10vw;
   }
 
   .hero__dashboard img {
-    border-radius: 16px 16px 0 0;
+    // border-radius: 16px 16px 0 0;
+    box-shadow: none;
   }
 }
 
@@ -896,12 +980,11 @@ margin-top: -16px;
 
 @media (max-width: 480px) {
   .hero__blue-background {
-    top: 55vh;
+    top: 86vh;
+    height: calc(14vh + 80px);
 
     right: 6px;
     left: 6px;
-
-    height: 45vh;
 
     border-radius: 0 0 24px 24px;
   }
@@ -934,11 +1017,11 @@ margin-top: -16px;
 
   .hero__primary-button,
   .hero__secondary-button {
-    min-height: 48px;
+    min-height: 46px;
 
-    padding-inline: 18px;
+    padding-inline: 14px;
 
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .hero__visual {
@@ -956,6 +1039,6 @@ margin-top: -16px;
   .hero__dashboard {
     width: 135vw;
 
-    margin-left: -17.5vw;
+    // margin-left: -17.5vw;
   }
 }

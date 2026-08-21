@@ -1,12 +1,12 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
 
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+// import gsap from "gsap";
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MagicStar, HierarchySquare3, TickCircle } from "iconsax-react";
 
 import "./Feature.scss";
 
-gsap.registerPlugin(ScrollTrigger);
+// gsap.registerPlugin(ScrollTrigger);
 
 /* =========================================================
    FEATURES DATA

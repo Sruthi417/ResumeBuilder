@@ -979,6 +979,9 @@ margin-bottom: 16px;
    ========================================================= */
 
 @media (max-width: 480px) {
+  .hero{
+    padding-top: 0.5rem;
+  }
   .hero__blue-background {
     top: 86vh;
     height: calc(14vh + 80px);

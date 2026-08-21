@@ -387,6 +387,41 @@
 
 
 /* =========================================================
+   LARGE DESKTOP / BLUE BACKDROP CUTOFF
+
+   `.footer__blue` is a purely decorative backdrop — it exists so
+   the white card's rounded top corners have a colored arch peeking
+   out behind them. `.footer__container`'s `margin-top: 90px` only
+   exists to expose that peek. Below this width the backdrop is
+   removed outright, so the margin that was reserving room for it
+   (and the top corner rounding, which has nothing to show through
+   once the backdrop is gone — a white card's rounded top on a
+   plain white page is invisible either way) are removed with it,
+   rather than leaving dead space where the peek used to be.
+   ========================================================= */
+
+@media (max-width: 1400px) {
+
+  .footer__blue {
+    display: none;
+  }
+
+  .footer {
+    min-height: auto;
+  }
+
+  .footer__container {
+    margin-top: 0;
+
+    border-radius: 0;
+
+    box-shadow: none;
+  }
+
+}
+
+
+/* =========================================================
    TABLET
 ========================================================= */
 
@@ -415,26 +450,14 @@
     min-height: auto;
   }
 
-
-  .footer__blue {
-    left: 12px;
-    right: 12px;
-
-    height: 250px;
-
-    border-radius: 28px 28px 0 0;
-  }
-
-
+  /* `.footer__blue` is already `display: none` and
+     `.footer__container`'s `margin-top`/`border-radius` already
+     zeroed below 1400px — this only still needs its own padding. */
   .footer__container {
-    margin-top: 130px;
-
     padding:
       3rem
       1.25rem
       1.5rem;
-
-    border-radius: 28px 28px 0 0;
   }
 
 
@@ -445,18 +468,32 @@
   }
 
 
+  @media (max-width: 650px) {
+
   .footer__subscribe {
     flex-direction: column;
-
     align-items: stretch;
+    width: 100%;
+    gap: 0.8rem;
   }
-
 
   .footer__subscribe input,
   .footer__subscribe button {
     width: 100%;
+    height: 60px !important;
+    min-height: 60px;
+    box-sizing: border-box;
   }
 
+  .footer__subscribe input {
+    padding: 0 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .footer__subscribe button {
+    padding: 0 1.5rem;
+  }
+}
 
   .footer__brand-name {
     margin-top: 4rem;
@@ -489,9 +526,18 @@
 ========================================================= */
 
 @media (max-width: 420px) {
-
+.footer{
+    padding-top: 4rem;
+}
+  /* Was previously `repeat(2, 1fr)` again here — identical to the
+     650px rule above, so it did nothing. Three link columns don't
+     fit two-up comfortably at this width anyway (the third always
+     wraps lopsided onto its own row) — stacking to one column reads
+     better than the redundant no-op. */
   .footer__links {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+
+    gap: 1.75rem;
   }
 
 }

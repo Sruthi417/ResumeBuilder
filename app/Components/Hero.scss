@@ -17,19 +17,7 @@
 }
 
 
-/* =========================================================
-   BLUE BACKGROUND
 
-   IMPORTANT:
-
-   This is NOT attached to the trust row.
-
-   It belongs directly to the hero and occupies only
-   the bottom 45% of the first viewport.
-
-   55vh → white
-   45vh → blue/grid
-   ========================================================= */
 
 .hero__blue-background {
   position: absolute;
@@ -64,23 +52,6 @@ margin-top: -3rem;
 }
 
 
-/* =========================================================
-   DOT GRID
-
-   Dots deliberately DON'T start at the top.
-
-   The first ~27% of the blue container remains clean.
-
-   This gives you:
-
-   WHITE
-      ↓
-   white/light blue gradient
-      ↓
-   dots
-      ↓
-   blue dotted area
-   ========================================================= */
 
 .hero__blue-dots {
   position: absolute;

@@ -141,7 +141,7 @@ margin-top: -3rem;
 
 .hero__content {
   max-width: 680px;
-  padding-left: 8rem;
+  padding-left: clamp(0rem, 5vw, 8rem);
   
 }
 

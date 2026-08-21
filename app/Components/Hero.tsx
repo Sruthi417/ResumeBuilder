@@ -102,7 +102,7 @@ const scale = useTransform(
             </motion.div>
 
             <motion.h1 variants={itemVariants}>
-              Build a resume that
+              Build a resume that{" "}
               <span className="highlight-word">gets</span>{" "}
               <span className="highlight-word">noticed.</span>
             </motion.h1>

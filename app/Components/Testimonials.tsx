@@ -67,10 +67,10 @@ const Testimonials = () => {
           </span> */}
 
           <h2>
-            Resumes that
+           Feel Ready With 
            
-            <span>feel</span>
-            <span>feel ready.</span>
+            <span> Resmind. </span>
+            {/* <span> ready.</span> */}
           </h2>
 
           <p>

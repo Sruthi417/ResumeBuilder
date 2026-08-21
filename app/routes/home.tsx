@@ -1,13 +1,15 @@
 import type { Route } from "./+types/home";
 import Navbar from "~/Components/Navbar";
 //import { resumes } from "~/constants/index";
-import ResumeCard from "~/Components/ResumeCard";
+// import ResumeCard from "~/Components/ResumeCard";
 import { usePuterStore } from "~/lib/puter";
 import { useLocation, useNavigate } from "react-router";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 import Hero from "~/Components/Hero";
 import UploadedResume from "../Components/UploadedResume";
+import Features from "~/Components/Feature";
+import Testimonials from "~/Components/Testimonials";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -72,6 +74,9 @@ export default function Home() {
   resumes={resumes}
   loadingResumes={loadingResumes}
 />
+
+<Features/>
+<Testimonials/>
 
         {!loadingResumes && resumes?.length === 0 && (
           <div className="flex flex-col items-center justify-center mt-6">

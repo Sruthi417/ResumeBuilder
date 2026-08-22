@@ -1,100 +1,362 @@
-import React, { useEffect , useState } from 'react'
-import { useParams,Link, useNavigate } from 'react-router'
-import Details from '~/Components/Details'
-import Ats from '~/Components/Ats'
+import { useEffect, useState } from "react";
+import { useParams, Link, useNavigate } from "react-router";
 
-import { usePuterStore } from '~/lib/puter'
-import OverView from '~/Components/OverView'
+import Details from "~/Components/Details";
+import Ats from "~/Components/Ats";
+import OverView from "~/Components/OverView";
 
-export const meta=()=>([
-    {title:'Resumind | Review'},
-    {name:'description', content:'Detailed overview of your resume'},
-])
+import { usePuterStore } from "~/lib/puter";
+
+import "./Resume.scss";
+
+export const meta = () => [
+  { title: "Resumind | Review" },
+  {
+    name: "description",
+    content: "Detailed overview of your resume",
+  },
+];
 
 const Resume = () => {
+  const { auth, isLoading, fs, kv } = usePuterStore();
 
-    const {auth,isLoading,fs,kv}=usePuterStore();
-    const {id}=useParams();
-    const[imageUrl,setImageUrl]=useState("");
-    const[resumeUrl,setResumeUrl]=useState("");
-    const[feedback,setFeedback]=useState <Feedback | null>(null);
-    const navigate=useNavigate();
+  const { id } = useParams();
+  const navigate = useNavigate();
 
+  const [imageUrl, setImageUrl] = useState("");
+  const [resumeUrl, setResumeUrl] = useState("");
+  const [feedback, setFeedback] = useState<Feedback | null>(null);
 
-    useEffect(()=>{
-        if(!isLoading && !auth.isAuthenticated) navigate('/auth?next=/resume/${id}');
-    },[isLoading])
+  /*
+   * =========================================================
+   * AUTHENTICATION
+   * =========================================================
+   */
 
-    useEffect(()=>{
-        const loadResume=async()=>{
-            const resume=await kv.get(`resume:${id}`);
+  useEffect(() => {
+    if (!isLoading && !auth.isAuthenticated) {
+      navigate(`/auth?next=/resume/${id}`);
+    }
+  }, [isLoading, auth.isAuthenticated, navigate, id]);
 
-            if(!resume) return;
+  /*
+   * =========================================================
+   * LOAD RESUME
+   * =========================================================
+   */
 
-            const data=JSON.parse(resume);
+  useEffect(() => {
+    const loadResume = async () => {
+      if (!id) return;
 
-            const resumeBlob=await fs.read(data.resumePath)
-            if(!resumeBlob) return;
+      const resume = await kv.get(`resume:${id}`);
 
-            const pdfBlob=new Blob([resumeBlob],{type:'application/pdf'});
-            const resumeUrl=URL.createObjectURL(pdfBlob);
-            setResumeUrl(resumeUrl);
+      if (!resume) return;
 
-            const imageBlob=await fs.read(data.imagePath);
-            if(!imageBlob) return;
-            const imageUrl=URL.createObjectURL(imageBlob)
-            setImageUrl(imageUrl);
+      const data = JSON.parse(resume);
 
-            setFeedback(data.feedback);
+      /*
+       * Resume PDF
+       */
+      const resumeBlob = await fs.read(data.resumePath);
 
-            console.log({resumeUrl,imageUrl,feedback:data.feedback});
-        }
+      if (!resumeBlob) return;
 
-        loadResume();
-    },[id])
+      const pdfBlob = new Blob([resumeBlob], {
+        type: "application/pdf",
+      });
+
+      const generatedResumeUrl = URL.createObjectURL(pdfBlob);
+
+      setResumeUrl(generatedResumeUrl);
+
+      /*
+       * Resume preview image
+       */
+      const imageBlob = await fs.read(data.imagePath);
+
+      if (!imageBlob) return;
+
+      const generatedImageUrl = URL.createObjectURL(imageBlob);
+
+      setImageUrl(generatedImageUrl);
+
+      /*
+       * Feedback
+       */
+      setFeedback(data.feedback);
+
+      console.log({
+        resumeUrl: generatedResumeUrl,
+        imageUrl: generatedImageUrl,
+        feedback: data.feedback,
+      });
+    };
+
+    loadResume();
+
+    /*
+     * Cleanup object URLs when component unmounts
+     */
+    return () => {
+      if (imageUrl) {
+        URL.revokeObjectURL(imageUrl);
+      }
+
+      if (resumeUrl) {
+        URL.revokeObjectURL(resumeUrl);
+      }
+    };
+  }, [id]);
 
   return (
-    <main className='!pt-0 min-h-screen bg-gray-50'>
-        <nav className='resume-nav'>
-            <Link to ="/" className="back-button">
-            <img src="/icons/back.svg" alt="back" className='w-2.5 h-2.5'/>
-            <span className='text-gray-800 text-sm font-semibold'>Back to Home</span>
-            </Link>
-        </nav>
+    <main className="resume-page">
 
-        <div className='flex flex-col lg:flex-row'>
-            <section className="w-full lg:w-1/2 lg:sticky lg:top-16 lg:h-[calc(100vh-64px)] flex items-center justify-center p-4 sm:p-8 bg-[url('/images/bg-small.svg')] bg-cover">
-                {imageUrl && resumeUrl && (
-                    <div className='animate-in fade-in duration-1000 gradient-border w-full max-w-2xl aspect-[1/1.4] lg:h-[90%]'>
-                       <a href={resumeUrl} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
-                        <img
-                        src={imageUrl}
-                        className='w-full h-full object-contain rounded-2xl shadow-xl'
-                        title="resume"
-                        alt="Resume Preview"/>
-                       </a>
-                    </div>
-                )}
-                
-            </section>
+      {/* =====================================================
+          BACK TO HOME
+      ===================================================== */}
 
-             <section className='w-full lg:w-1/2 flex flex-col gap-8 p-4 sm:p-8'>
-                <h2 className="text-3xl sm:text-4xl !text-black font-bold text-left">Resume Review</h2>
-                {feedback?(
-                    <div className="flex flex-col gap-8 animate-in fade-in duration-1000">
-                       <OverView feedback={feedback}/>
-                       <Ats score={feedback.ATS.score || 0} suggestions={feedback.ATS.tips || []} />
-                       <Details feedback={feedback}/>
-                    </div>
-                ):(
-                    <div className="flex items-center justify-center py-20">
-                        <img src="/images/resume-scan-2.gif" className='w-48 h-48 sm:w-64 sm:h-64' alt="Scanning..."/>
-                    </div>
-                )}
-             </section>
-        </div>
+      <nav className="resume-page__nav">
+        <Link to="/" className="resume-page__back">
+          <img
+            src="/icons/back.svg"
+            alt=""
+            className="resume-page__back-icon"
+          />
+
+          <span>Back to Home</span>
+        </Link>
+      </nav>
+
+
+      {/* =====================================================
+          MAIN RESUME REVIEW GRID
+      ===================================================== */}
+
+      <div className="resume-page__layout">
+
+        {/* ===================================================
+            LEFT — RESUME PREVIEW
+        =================================================== */}
+
+        <section className="resume-page__preview">
+
+          {/* Blue dotted background */}
+          <div
+            className="resume-page__dots"
+            aria-hidden="true"
+          />
+
+          {/* Resume */}
+          {imageUrl && resumeUrl ? (
+            <div className="resume-page__resume-wrapper">
+
+              <a
+                href={resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="resume-page__resume-link"
+              >
+                <img
+                  src={imageUrl}
+                  className="resume-page__resume-image"
+                  title="Resume"
+                  alt="Resume Preview"
+                />
+              </a>
+
+            </div>
+          ) : (
+            <div className="resume-page__loading">
+              <img
+                src="/images/resume-scan-2.gif"
+                alt="Scanning resume..."
+              />
+            </div>
+          )}
+
+        </section>
+
+
+        {/* ===================================================
+            RIGHT — RESUME REVIEW
+        =================================================== */}
+
+        <section className="resume-page__review">
+
+          <div className="resume-page__review-inner">
+
+            <h1 className="resume-page__title">
+              Resume Review
+            </h1>
+
+            {feedback ? (
+
+              <div className="resume-page__feedback">
+
+                {/* These components stay unchanged for now */}
+                <OverView feedback={feedback} />
+
+                <Ats
+                  score={feedback.ATS.score || 0}
+                  suggestions={feedback.ATS.tips || []}
+                />
+
+                <Details feedback={feedback} />
+
+              </div>
+
+            ) : (
+
+              <div className="resume-page__review-loading">
+                <img
+                  src="/images/resume-scan-2.gif"
+                  alt="Scanning..."
+                />
+              </div>
+
+            )}
+
+          </div>
+
+        </section>
+
+      </div>
+
     </main>
-  )
-}
+  );
+};
 
-export default Resume
+export default Resume;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useEffect , useState } from 'react'
+// import { useParams,Link, useNavigate } from 'react-router'
+// import Details from '~/Components/Details'
+// import Ats from '~/Components/Ats'
+
+// import { usePuterStore } from '~/lib/puter'
+// import OverView from '~/Components/OverView'
+
+// export const meta=()=>([
+//     {title:'Resumind | Review'},
+//     {name:'description', content:'Detailed overview of your resume'},
+// ])
+
+// const Resume = () => {
+
+//     const {auth,isLoading,fs,kv}=usePuterStore();
+//     const {id}=useParams();
+//     const[imageUrl,setImageUrl]=useState("");
+//     const[resumeUrl,setResumeUrl]=useState("");
+//     const[feedback,setFeedback]=useState <Feedback | null>(null);
+//     const navigate=useNavigate();
+
+
+//     useEffect(()=>{
+//         if(!isLoading && !auth.isAuthenticated) navigate('/auth?next=/resume/${id}');
+//     },[isLoading])
+
+//     useEffect(()=>{
+//         const loadResume=async()=>{
+//             const resume=await kv.get(`resume:${id}`);
+
+//             if(!resume) return;
+
+//             const data=JSON.parse(resume);
+
+//             const resumeBlob=await fs.read(data.resumePath)
+//             if(!resumeBlob) return;
+
+//             const pdfBlob=new Blob([resumeBlob],{type:'application/pdf'});
+//             const resumeUrl=URL.createObjectURL(pdfBlob);
+//             setResumeUrl(resumeUrl);
+
+//             const imageBlob=await fs.read(data.imagePath);
+//             if(!imageBlob) return;
+//             const imageUrl=URL.createObjectURL(imageBlob)
+//             setImageUrl(imageUrl);
+
+//             setFeedback(data.feedback);
+
+//             console.log({resumeUrl,imageUrl,feedback:data.feedback});
+//         }
+
+//         loadResume();
+//     },[id])
+
+//   return (
+//     <main className='!pt-0 min-h-screen bg-gray-50'>
+//         <nav className='resume-nav'>
+//             <Link to ="/" className="back-button">
+//             <img src="/icons/back.svg" alt="back" className='w-2.5 h-2.5'/>
+//             <span className='text-gray-800 text-sm font-semibold'>Back to Home</span>
+//             </Link>
+//         </nav>
+
+//         <div className='flex flex-col lg:flex-row'>
+//             <section className="w-full lg:w-1/2 lg:sticky lg:top-16 lg:h-[calc(100vh-64px)] flex items-center justify-center p-4 sm:p-8 bg-[url('/images/bg-small.svg')] bg-cover">
+//                 {imageUrl && resumeUrl && (
+//                     <div className='animate-in fade-in duration-1000 gradient-border w-full max-w-2xl aspect-[1/1.4] lg:h-[90%]'>
+//                        <a href={resumeUrl} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
+//                         <img
+//                         src={imageUrl}
+//                         className='w-full h-full object-contain rounded-2xl shadow-xl'
+//                         title="resume"
+//                         alt="Resume Preview"/>
+//                        </a>
+//                     </div>
+//                 )}
+                
+//             </section>
+
+//              <section className='w-full lg:w-1/2 flex flex-col gap-8 p-4 sm:p-8'>
+//                 <h2 className="text-3xl sm:text-4xl !text-black font-bold text-left">Resume Review</h2>
+//                 {feedback?(
+//                     <div className="flex flex-col gap-8 animate-in fade-in duration-1000">
+//                        <OverView feedback={feedback}/>
+//                        <Ats score={feedback.ATS.score || 0} suggestions={feedback.ATS.tips || []} />
+//                        <Details feedback={feedback}/>
+//                     </div>
+//                 ):(
+//                     <div className="flex items-center justify-center py-20">
+//                         <img src="/images/resume-scan-2.gif" className='w-48 h-48 sm:w-64 sm:h-64' alt="Scanning..."/>
+//                     </div>
+//                 )}
+//              </section>
+//         </div>
+//     </main>
+//   )
+// }
+
+// export default Resume

@@ -1,0 +1,242 @@
+/* =========================================================
+   OVERVIEW CARD
+========================================================= */
+
+.overview {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #eaecf0;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  font-family: inherit;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.overview__header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem;
+  padding-top: 1.5rem;
+}
+
+.overview__gauge {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+}
+
+.overview__header-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.overview__header-content h2 {
+  margin: 0;
+  color: #101828;
+  font-size: clamp(24px, 3.5vw, 30px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.overview__header-content p {
+  margin: 0 auto;
+  color: #475467;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  max-width: 400px;
+}
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.overview__divider {
+  width: 100%;
+  height: 1px;
+  background: #f2f4f7;
+}
+
+/* =========================================================
+   CATEGORIES LIST
+========================================================= */
+
+.overview__categories {
+  display: flex;
+  flex-direction: column;
+  padding: 0 2.5rem;
+}
+
+/* =========================================================
+   CATEGORY ROW (GRID LAYOUT)
+========================================================= */
+
+.overview__category {
+  display: flex;
+  // justify-content: space-between;
+
+  align-items: center;
+  min-height: 76px;
+  border-bottom: 1px solid #f2f4f7;
+  padding: 0.5rem 0;
+  width: 100%;
+}
+
+.overview__category:last-child {
+  border-bottom: none;
+}
+
+.overview__category-title {
+  flex: 0 0 150px;
+}
+
+.overview__category-title p {
+  margin: 0;
+  color: #101828;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+/* =========================================================
+   PROGRESS BAR
+========================================================= */
+
+.overview__progress {
+  flex: 1;
+  margin: 0 clamp(1.5rem, 3vw, 3rem);
+  height: 8px;
+  background: #f2f4f7;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.overview__progress-fill {
+  height: 100%;
+  background: #f79009;
+  border-radius: inherit;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =========================================================
+   SCORE
+========================================================= */
+
+.overview__score {
+  display: flex;
+  align-items: baseline;
+  font-size: 1rem;
+  font-weight: 600;
+  flex-shrink: 0;
+  
+}
+
+.overview__score span {
+  color: #f79009;
+}
+
+.overview__score small {
+  color: #475467;
+  font-weight: 400;
+  margin-left: 2px;
+}
+
+/* =========================================================
+   BADGE
+========================================================= */
+
+.overview__badge {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-shrink: 0;
+  min-width: 120px;
+}
+
+.score-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Color theme mappings */
+.bg-badge-green {
+  background-color: #d5faf1;
+}
+.text-badge-green-text {
+  color: #254d4a;
+}
+
+.bg-badge-yellow {
+  background-color: #fceed8;
+}
+.text-badge-yellow-text {
+  color: #73321b;
+}
+
+.bg-badge-red {
+  background-color: #f9e3e2;
+}
+.text-badge-red-text {
+  color: #752522;
+}
+
+/* =========================================================
+   RESPONSIVENESS (MOBILE)
+========================================================= */
+
+@media (max-width: 768px) {
+  .overview__header {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .overview__header-content {
+    align-items: center;
+  }
+
+  .overview__categories {
+    padding: 0 1.5rem;
+  }
+
+  .overview__category {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "title score"
+      "progress progress"
+      "badge badge";
+    row-gap: 0.75rem;
+    padding: 1.25rem 0;
+    min-height: auto;
+  }
+
+  .overview__category-title {
+    grid-area: title;
+  }
+
+  .overview__score {
+    grid-area: score;
+  }
+
+  .overview__progress {
+    grid-area: progress;
+    max-width: 100%;
+  }
+
+  .overview__badge {
+    grid-area: badge;
+  }
+}

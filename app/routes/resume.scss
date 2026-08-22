@@ -1,0 +1,595 @@
+/* =========================================================
+   RESUME PAGE
+========================================================= */
+
+.resume-page {
+  position: relative;
+
+  min-height: 100vh;
+
+  background: #f8fafc;
+
+  color: #111111;
+
+//   overflow-x: hidden;
+}
+
+
+/* =========================================================
+   TOP NAV / BACK BUTTON
+========================================================= */
+
+.resume-page__nav {
+  position: fixed;
+
+  top: 22px;
+  left: 22px;
+
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+}
+
+
+.resume-page__back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  min-height: 42px;
+
+  padding: 0 17px;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  border: 1px solid rgba(220, 225, 232, 0.9);
+
+  border-radius: 12px;
+
+  color: #111111;
+
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  box-shadow:
+    0 8px 24px rgba(20, 35, 60, 0.08),
+    0 2px 6px rgba(20, 35, 60, 0.04);
+
+  backdrop-filter: blur(10px);
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    background: #ffffff;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+      0 10px 28px rgba(20, 35, 60, 0.11),
+      0 3px 8px rgba(20, 35, 60, 0.05);
+  }
+}
+
+
+.resume-page__back-icon {
+  width: 11px;
+  height: 11px;
+
+  object-fit: contain;
+}
+
+
+/* =========================================================
+   MAIN TWO-COLUMN LAYOUT
+========================================================= */
+
+.resume-page__layout {
+  display: grid;
+  grid-template-columns: 50vw 50vw;
+  width: 100%;
+  min-height: 100vh;
+  align-items: start;
+}
+
+/* =========================================================
+   LEFT — RESUME PREVIEW
+========================================================= */
+
+.resume-page__preview {
+  position: sticky;
+  top: 0;
+
+  width: 50vw;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: clamp(70px, 7vw, 100px)
+           clamp(28px, 4vw, 70px);
+
+  overflow: hidden;
+
+  background: #eef4ff;
+}
+
+
+/* =========================================================
+   BLUE DOT BACKGROUND
+========================================================= */
+
+.resume-page__dots {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 0;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(210, 225, 255, 0.9) 0%,
+      rgba(230, 238, 255, 0.75) 45%,
+      #ffffff 100%
+    );
+
+  background-size: 10px 10px;
+
+  /*
+   * The blue area is stronger toward the bottom
+   * and fades toward the top.
+   */
+
+ mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.15) 8%,
+    rgba(0, 0, 0, 0.4) 22%,
+    rgba(0, 0, 0, 0.75) 42%,
+    #000 65%,
+    #000 100%
+  );
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.15) 8%,
+    rgba(0, 0, 0, 0.4) 22%,
+    rgba(0, 0, 0, 0.75) 42%,
+    #000 65%,
+    #000 100%);
+
+  /*
+   * Soft blue glow behind the dots.
+   */
+
+  &::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+      radial-gradient(
+        ellipse at 75% 35%,
+        rgba(185, 205, 255, 0.38) 0%,
+        rgba(185, 205, 255, 0.18) 35%,
+        transparent 70%
+      );
+
+    pointer-events: none;
+  }
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   RESUME WRAPPER
+========================================================= */
+
+.resume-page__resume-wrapper {
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: min(100%, 550px);
+
+  height: min(84vh, 800px);
+
+  padding: 0;
+ margin-top: 4rem;
+
+  border-radius: 24px;
+
+  overflow: hidden;
+
+  /*
+   * Very subtle container shadow similar to
+   * the reference design.
+   */
+
+  box-shadow:
+    0 24px 55px rgba(45, 70, 110, 0.12),
+    0 5px 16px rgba(45, 70, 110, 0.06);
+}
+
+
+/* =========================================================
+   RESUME LINK
+========================================================= */
+
+.resume-page__resume-link {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+}
+
+
+/* =========================================================
+   RESUME IMAGE
+========================================================= */
+
+.resume-page__resume-image {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  background: #ffffff;
+padding-top: 2rem;
+  border-radius: 0;
+
+  user-select: none;
+}
+
+
+/* =========================================================
+   LEFT LOADING
+========================================================= */
+
+.resume-page__loading {
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+}
+
+
+.resume-page__loading img {
+  width: clamp(160px, 20vw, 260px);
+  height: clamp(160px, 20vw, 260px);
+
+  object-fit: contain;
+}
+
+
+/* =========================================================
+   RIGHT — REVIEW AREA
+========================================================= */
+
+.resume-page__review {
+  width: 50vw;
+
+  min-height: 100vh;
+
+  padding:
+    clamp(80px, 7vw, 110px)
+    clamp(28px, 4vw, 72px)
+    70px;
+
+  background: #f8fafc;
+}
+
+
+.resume-page__review-inner {
+  width: 100%;
+
+  max-width: 760px;
+
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   REVIEW TITLE
+========================================================= */
+
+.resume-page__title {
+  margin: 0 0 30px;
+
+  color: #111111;
+
+  font-size: clamp(2rem, 3vw, 3rem);
+
+  font-weight: 500;
+
+  line-height: 1.1;
+
+  letter-spacing: -0.04em;
+}
+
+
+/* =========================================================
+   FEEDBACK COMPONENTS CONTAINER
+========================================================= */
+
+.resume-page__feedback {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 30px;
+
+  width: 100%;
+
+  animation: resumeFadeIn 0.7s ease both;
+}
+
+
+/* =========================================================
+   REVIEW LOADING
+========================================================= */
+
+.resume-page__review-loading {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 500px;
+}
+
+
+.resume-page__review-loading img {
+  width: clamp(180px, 25vw, 280px);
+  height: clamp(180px, 25vw, 280px);
+
+  object-fit: contain;
+}
+
+
+/* =========================================================
+   FADE IN
+========================================================= */
+
+@keyframes resumeFadeIn {
+  from {
+    opacity: 0;
+
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+
+@media (min-width: 1600px) {
+
+  .resume-page__preview {
+    padding-left: 70px;
+    padding-right: 70px;
+  }
+
+  .resume-page__review {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+
+  .resume-page__review-inner {
+    max-width: 800px;
+  }
+}
+
+
+/* =========================================================
+   TABLET / SMALL DESKTOP
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .resume-page__layout {
+    grid-template-columns: 48% 52%;
+  }
+
+  .resume-page__preview {
+    width: 48vw;
+
+    padding:
+      80px
+      24px
+      40px;
+  }
+
+  .resume-page__review {
+    width: 52vw;
+
+    padding:
+      80px
+      28px
+      60px;
+  }
+
+  .resume-page__resume-wrapper {
+    height: min(82vh, 800px);
+
+    border-radius: 20px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE / SINGLE COLUMN
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .resume-page__nav {
+    top: 16px;
+    left: 16px;
+  }
+
+  .resume-page__back {
+    min-height: 40px;
+
+    padding: 0 14px;
+
+    font-size: 13px;
+  }
+
+
+  .resume-page__layout {
+    display: flex;
+
+    flex-direction: column;
+
+    min-height: auto;
+  }
+
+
+  /* -------------------------------------------------------
+     Resume preview
+  ------------------------------------------------------- */
+
+  .resume-page__preview {
+    position: relative;
+
+    top: auto;
+
+    width: 100%;
+
+    height: auto;
+
+    min-height: 100vh;
+
+    padding:
+      90px
+      20px
+      40px;
+  }
+
+
+  .resume-page__resume-wrapper {
+    width: min(100%, 650px);
+
+    height: auto;
+
+    aspect-ratio: 1 / 1.414;
+
+    border-radius: 18px;
+  }
+
+
+  /* -------------------------------------------------------
+     Review
+  ------------------------------------------------------- */
+
+  .resume-page__review {
+    width: 100%;
+
+    min-height: auto;
+
+    padding:
+      50px
+      20px
+      60px;
+  }
+
+
+  .resume-page__title {
+    font-size: 2rem;
+
+    margin-bottom: 24px;
+  }
+
+
+  .resume-page__feedback {
+    gap: 24px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .resume-page__nav {
+    top: 12px;
+    left: 12px;
+  }
+
+  .resume-page__back {
+    min-height: 38px;
+
+    padding: 0 12px;
+
+    gap: 7px;
+
+    border-radius: 10px;
+
+    font-size: 12px;
+  }
+
+
+  .resume-page__preview {
+    min-height: auto;
+
+    padding:
+      75px
+      14px
+      30px;
+  }
+
+
+  .resume-page__resume-wrapper {
+    border-radius: 14px;
+  }
+
+
+  .resume-page__review {
+    padding:
+      40px
+      14px
+      50px;
+  }
+
+
+  .resume-page__title {
+    font-size: 1.8rem;
+  }
+}

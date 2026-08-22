@@ -26,24 +26,20 @@ export default function Home() {
   const [resumes, setResumes] = useState<Resume[]>([]);
   const [loadingResumes, setLoadingResumes] = useState(false);
 
-  useEffect(() => {
-    if (!auth.isAuthenticated) navigate("/auth?next=/");
-  }, [auth.isAuthenticated]);
+  // useEffect(() => {
+  //   const loadResumes = async () => {
+  //     setLoadingResumes(true);
+  //     const resumes = (await kv.list("resume:*", true)) as KVItem[];
+  //     const parsedResumes = resumes?.map(
+  //       (resume) => JSON.parse(resume.value) as Resume,
+  //     );
 
-  useEffect(() => {
-    const loadResumes = async () => {
-      setLoadingResumes(true);
-      const resumes = (await kv.list("resume:*", true)) as KVItem[];
-      const parsedResumes = resumes?.map(
-        (resume) => JSON.parse(resume.value) as Resume,
-      );
-
-      console.log("parsedResumes");
-      setResumes(parsedResumes || []);
-      setLoadingResumes(false);
-    };
-    loadResumes();
-  }, []);
+  //     console.log("parsedResumes");
+  //     setResumes(parsedResumes || []);
+  //     setLoadingResumes(false);
+  //   };
+  //   loadResumes();
+  // }, []);
 
   return (
     <main>

@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router";
 import "./Navbar.scss";
+import { usePuterStore } from "~/lib/puter";
 
 interface NavbarProps {
   uploadedResumes?: Resume[];
 }
 
 const Navbar = ({ uploadedResumes = [] }: NavbarProps) => {
+  const { auth } = usePuterStore();
   const hasResumes = uploadedResumes.length > 0;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -62,11 +64,8 @@ const Navbar = ({ uploadedResumes = [] }: NavbarProps) => {
           </NavLink>
         </div>
 
-        <Link to="/upload" className="navbar__action">
-          Analyze Resume
-          {/* <span className="navbar__arrow" aria-hidden="true">
-            -&gt;
-          </span> */}
+        <Link to="/auth" className="navbar__action">
+          {auth.isAuthenticated ? "Sign Out" : "Sign In"}
         </Link>
 
         {/* Below the breakpoint where the links + action button no
@@ -138,11 +137,11 @@ const Navbar = ({ uploadedResumes = [] }: NavbarProps) => {
         </NavLink>
 
         <Link
-          to="/upload"
+          to="/auth"
           className="navbar__menu-link navbar__menu-link--primary"
           onClick={closeMenu}
         >
-          Analyze Resume
+          {auth.isAuthenticated ? "Sign Out" : "Sign In"}
         </Link>
       </div>
     </>

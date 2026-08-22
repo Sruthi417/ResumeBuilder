@@ -240,3 +240,34 @@
     grid-area: badge;
   }
 }
+
+@media (max-width: 550px) {
+  .overview__category {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    min-height: auto;
+  }
+
+  .overview__progress {
+    display: none !important;
+  }
+
+  .overview__category-title {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .overview__score {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .overview__badge {
+    min-width: auto;
+    justify-content: flex-end;
+  }
+}

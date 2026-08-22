@@ -1,0 +1,572 @@
+/* =========================================================
+   LOGIN PAGE
+========================================================= */
+
+.login {
+  position: relative;
+
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    clamp(2rem, 5vw, 5rem)
+    clamp(1rem, 4vw, 3rem);
+    padding-bottom: 0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #ffffff 0%,
+      #f9fcff 30%,
+      #eef6ff 70%,
+      #e4f1ff 100%
+    );
+
+  font-family: "Inter", sans-serif;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.login__background {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 0;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   DOTS
+========================================================= */
+
+.login__dots {
+  position: absolute;
+
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-image: radial-gradient(
+    circle,
+    rgba(136, 186, 242, 0.28) 1px,
+    transparent 1.25px
+  );
+
+  background-size: 10px 10px;
+
+  /*
+   * Keep the dots subtle at the top
+   * and stronger toward the bottom.
+   */
+
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.35) 15%,
+    rgba(0, 0, 0, 0.8) 35%,
+    #000 60%,
+    #000 100%
+  );
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.35) 15%,
+    rgba(0, 0, 0, 0.8) 35%,
+    #000 60%,
+    #000 100%
+  );
+}
+
+
+/* =========================================================
+   MAIN WRAPPER
+========================================================= */
+
+.login__wrapper {
+  position: relative;
+
+  z-index: 2;
+
+  width: min(100%, 700px);
+  
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  /*
+   * Gives the illustration room above the card.
+   */
+  padding-top: clamp(5rem, 10vw, 8rem);
+//   margin-top: 2rem;
+}
+
+
+/* =========================================================
+   ILLUSTRATION
+========================================================= */
+
+.login__illustration {
+  position: absolute;
+
+  z-index: 3;
+
+  top: 0;
+
+  left: 50%;
+
+//   transform: translateX(-50%);
+
+  width: clamp(240px, 28vw, 250px);
+
+  display: flex;
+//   margin-top: -4.9rem;
+//   margin-left: 5rem;
+margin-top: clamp(-4.9rem, -6vw, -2rem);
+  margin-left: clamp(0rem, 5vw, 5rem);
+
+  justify-content: center;
+
+  pointer-events: none;
+}
+
+
+.login__illustration img {
+  display: block;
+
+  width: 100%;
+
+  height: auto;
+
+  object-fit: contain;
+
+  user-select: none;
+}
+
+
+/* =========================================================
+   LOGIN CARD
+========================================================= */
+
+.login__card {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+
+  max-height: 390px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding:
+    clamp(5rem, 8vw, 6rem)
+    clamp(2rem, 7vw, 5rem)
+    clamp(3.5rem, 6vw, 4.5rem);
+
+  background: rgba(255, 255, 255, 0.96);
+
+  border: 1px solid rgba(220, 225, 232, 0.8);
+
+  border-radius: 22px;
+
+  box-shadow:
+    0 15px 45px rgba(40, 70, 110, 0.08),
+    0 2px 8px rgba(40, 70, 110, 0.04);
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.login__content {
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.login__content h1 {
+  margin: 0;
+
+  color: #111317;
+
+  font-size:
+    clamp(2.2rem, 4vw, 3.15rem);
+
+  font-weight: 500;
+
+  line-height: 1.05;
+
+  letter-spacing: -0.055em;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.login__content p {
+  margin:
+    clamp(1rem, 2vw, 1.4rem)
+    0
+    0;
+
+  color: #687386;
+
+  font-size:
+    clamp(1rem, 1.8vw, 1.25rem);
+
+  font-weight: 400;
+
+  line-height: 1.5;
+
+  letter-spacing: -0.015em;
+}
+
+
+/* =========================================================
+   ACTION
+========================================================= */
+
+.login__action {
+  width: 100%;
+
+  display: flex;
+
+  justify-content: center;
+
+  margin-top:
+    clamp(1.5rem, 4vw, 2.5rem);
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.login__button {
+  width: min(100%, 465px);
+
+  height: 60px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 1rem;
+
+  padding: 0 2rem;
+
+  border: none;
+
+  border-radius: 13px;
+
+  background: linear-gradient(
+    135deg,
+    #3446ff 0%,
+    #263cff 100%
+  );
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size:
+    clamp(1.15rem, 2vw, 1.35rem);
+
+  font-weight: 400;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 22px rgba(45, 65, 255, 0.22);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
+}
+
+
+.login__button:hover {
+//   transform: translateY(-2px);
+
+  box-shadow:
+    0 14px 28px rgba(45, 65, 255, 0.28);
+
+  filter: brightness(1.03);
+}
+
+
+.login__button:active {
+  transform: translateY(0);
+}
+
+
+.login__button svg {
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.login__button--loading {
+  cursor: wait;
+
+  opacity: 0.8;
+
+  animation: loginPulse 1.5s ease-in-out infinite;
+}
+
+
+@keyframes loginPulse {
+
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .login {
+    padding:
+      2rem
+      1.5rem;
+  }
+
+
+  .login__wrapper {
+    width: min(100%, 760px);
+
+    padding-top: 7rem;
+  }
+
+
+  .login__illustration {
+    width: 300px;
+  }
+
+
+  .login__card {
+    min-height: 400px;
+
+    padding:
+      5rem
+      3rem
+      3.5rem;
+  }
+
+
+  .login__button {
+    width: min(100%, 430px);
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .login {
+    min-height: 100svh;
+
+    align-items: center;
+
+    padding:
+      1.5rem
+      1rem;
+  }
+
+
+  .login__wrapper {
+    width: 100%;
+
+    padding-top: 9rem;
+  }
+
+
+  .login__illustration {
+    width: 270px;
+
+    top: 0;
+  }
+
+
+  .login__card {
+    min-height: auto;
+
+    padding:
+      5rem
+      1.5rem
+      2.5rem;
+
+    border-radius: 20px;
+  }
+
+
+  .login__content h1 {
+    font-size:
+      clamp(2rem, 9vw, 2.65rem);
+
+    line-height: 1.08;
+  }
+
+
+  .login__content p {
+    margin-top: 1rem;
+
+    font-size:
+      clamp(0.95rem, 4vw, 1.1rem);
+
+    line-height: 1.55;
+  }
+
+
+  .login__desktop-break {
+    display: none;
+  }
+
+
+  .login__action {
+    margin-top: 2.5rem;
+  }
+
+
+  .login__button {
+    width: 100%;
+
+    height: 68px;
+
+    border-radius: 12px;
+
+    font-size: 1.15rem;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+  .login {
+    padding:
+      1rem
+      0.75rem;
+  }
+
+
+  .login__wrapper {
+    padding-top: 8rem;
+  }
+
+
+  .login__illustration {
+    width: 235px;
+  }
+
+
+  .login__card {
+    padding:
+      4.5rem
+      1.25rem
+      2rem;
+
+    border-radius: 18px;
+  }
+
+
+  .login__content h1 {
+    font-size: 1.9rem;
+  }
+
+
+  .login__content p {
+    font-size: 0.92rem;
+  }
+
+
+  .login__button {
+    height: 62px;
+
+    font-size: 1.05rem;
+
+    gap: 0.75rem;
+  }
+
+
+  .login__button svg {
+    width: 21px;
+
+    height: 21px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .login__button {
+    transition: none;
+  }
+
+  .login__button--loading {
+    animation: none;
+  }
+
+}

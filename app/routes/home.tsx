@@ -26,20 +26,29 @@ export default function Home() {
   const [resumes, setResumes] = useState<Resume[]>([]);
   const [loadingResumes, setLoadingResumes] = useState(false);
 
-  // useEffect(() => {
-  //   const loadResumes = async () => {
-  //     setLoadingResumes(true);
-  //     const resumes = (await kv.list("resume:*", true)) as KVItem[];
-  //     const parsedResumes = resumes?.map(
-  //       (resume) => JSON.parse(resume.value) as Resume,
-  //     );
+  useEffect(() => {
+    if (!auth.isAuthenticated) {
+      setResumes([]);
+      return;
+    }
+    const loadResumes = async () => {
+      setLoadingResumes(true);
+      try {
+        const resumesList = (await kv.list("resume:*", true)) as { key: string; value: string }[];
+        const parsedResumes = resumesList?.map(
+          (resume) => JSON.parse(resume.value) as Resume,
+        );
 
-  //     console.log("parsedResumes");
-  //     setResumes(parsedResumes || []);
-  //     setLoadingResumes(false);
-  //   };
-  //   loadResumes();
-  // }, []);
+        console.log("parsedResumes", parsedResumes);
+        setResumes(parsedResumes || []);
+      } catch (e) {
+        console.error("Failed to load resumes:", e);
+      } finally {
+        setLoadingResumes(false);
+      }
+    };
+    loadResumes();
+  }, [auth.isAuthenticated, kv]);
 
   return (
     <main>

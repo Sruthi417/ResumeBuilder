@@ -1,4 +1,3 @@
-import React from "react";
 import { ArrowRight } from "iconsax-react";
 
 import "./Login.scss";

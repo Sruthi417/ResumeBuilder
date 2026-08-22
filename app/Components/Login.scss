@@ -435,9 +435,12 @@ margin-top: clamp(-4.9rem, -6vw, -2rem);
 
 
   .login__illustration {
-    width: 270px;
-
+    width: clamp(200px, 45vw, 270px);
     top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: 0;
+    margin-top: -4.5rem;
   }
 
 
@@ -513,7 +516,12 @@ margin-top: clamp(-4.9rem, -6vw, -2rem);
 
 
   .login__illustration {
-    width: 235px;
+    width: clamp(160px, 45vw, 220px);
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: 0;
+    margin-top: -1rem;
   }
 
 
@@ -550,6 +558,21 @@ margin-top: clamp(-4.9rem, -6vw, -2rem);
     width: 21px;
 
     height: 21px;
+  }
+
+}
+@media (max-width: 575px) {
+    
+  .login__illustration {
+    margin-top: -1rem;
+  }
+
+}
+
+@media (max-width: 380px) {
+    
+  .login__illustration {
+    margin-top: -0.5rem;
   }
 
 }

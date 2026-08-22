@@ -18,6 +18,13 @@
   --color-badge-yellow-text: #73321b;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  scroll-behavior: smooth;
+}
 
 
 @layer components {

@@ -1,0 +1,499 @@
+/* =========================================================
+   FORM UPLOAD
+========================================================= */
+
+.form-upload {
+  position: relative;
+
+  z-index: 2;
+
+  width: min(100%, 850px);
+
+  margin: 2rem auto;
+
+  padding:
+    clamp(7rem, 10vw, 9rem)
+    clamp(1.25rem, 4vw, 3rem)
+    clamp(4rem, 7vw, 6rem);
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.form-upload__heading {
+  text-align: center;
+
+  margin-bottom:
+    clamp(2.5rem, 5vw, 4rem);
+}
+
+
+
+
+.form-upload__heading h1 {
+  margin: 0 auto;
+  max-width: 500px;
+
+  color: #111317;
+
+  font-size:
+    clamp(48px, 5vw, 56px);
+
+  font-weight: 400;
+
+  line-height: 0.98;
+
+  letter-spacing: -0.065em;
+}
+
+
+.form-upload__heading h1 span {
+  color: #7d8795;
+}
+
+
+.form-upload__heading p {
+  margin:
+    clamp(1rem, 2vw, 1.5rem)
+    auto
+    0;
+
+  max-width: 400px;
+
+  color: #687386;
+
+  font-size:
+    clamp(1rem, 1.8vw, 1.2rem);
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-upload__form {
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+
+/* =========================================================
+   FIELD
+========================================================= */
+
+.form-upload__field {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 0.65rem;
+}
+
+
+.form-upload__field label {
+  color: #20242b;
+
+  font-size: 0.9rem;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   INPUT / TEXTAREA
+========================================================= */
+
+.form-upload__field input,
+.form-upload__field textarea {
+  width: 100%;
+
+  border: 1px solid #e3e7ec;
+
+  outline: none;
+
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.95);
+
+  color: #111317;
+
+  font-family: inherit;
+
+  font-size: 0.95rem;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.form-upload__field input {
+  height: clamp(52px, 5vw, 58px);
+
+  padding: 0 1.2rem;
+}
+
+
+.form-upload__field textarea {
+  min-height: 140px;
+
+  padding: 1rem 1.2rem;
+
+  resize: vertical;
+}
+
+
+.form-upload__field input::placeholder,
+.form-upload__field textarea::placeholder {
+  color: #9aa3b1;
+}
+
+
+.form-upload__field input:focus,
+.form-upload__field textarea:focus {
+  border-color: #a9c9ec;
+
+  box-shadow:
+    0 0 0 4px rgba(136, 186, 242, 0.1);
+}
+
+
+/* =========================================================
+   DROPZONE
+========================================================= */
+
+.form-upload__dropzone-wrapper {
+  width: 100%;
+}
+
+
+.form-upload__dropzone {
+  width: 100%;
+
+  min-height:
+    clamp(170px, 20vw, 210px);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 1.5rem;
+
+  border: 1px dashed #b9c8d9;
+
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.7);
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+.form-upload__dropzone:hover,
+.form-upload__dropzone--active {
+  border-color: #88baf2;
+
+//   background: rgba(236, 246, 255, 0.8);
+}
+
+
+.form-upload__dropzone--active {
+  transform: scale(1.01);
+}
+
+
+/* =========================================================
+   EMPTY DROPZONE
+========================================================= */
+
+.form-upload__empty {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+}
+
+
+.form-upload__upload-icon {
+  width: 58px;
+
+  height: 58px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-bottom: 1rem;
+
+  border-radius: 50%;
+
+  background: #edf6ff;
+
+  color: #6da8e8;
+
+  font-size: 1.8rem;
+
+  font-weight: 400;
+}
+
+
+.form-upload__empty p {
+  margin: 0;
+
+  color: #687386;
+
+  font-size: 0.95rem;
+}
+
+
+.form-upload__empty p strong {
+  color: #20242b;
+
+  font-weight: 600;
+}
+
+
+.form-upload__empty span {
+  margin-top: 0.45rem;
+
+  color: #9aa3b1;
+
+  font-size: 0.85rem;
+}
+
+
+/* =========================================================
+   SELECTED FILE
+========================================================= */
+
+.form-upload__selected-file {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 1rem;
+}
+
+
+.form-upload__file-info {
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.9rem;
+}
+
+
+.form-upload__file-info img {
+  width: 44px;
+
+  height: 44px;
+
+  flex-shrink: 0;
+
+  object-fit: contain;
+}
+
+
+.form-upload__file-info p {
+  margin: 0;
+
+  max-width: 400px;
+
+  overflow: hidden;
+
+  color: #20242b;
+
+  font-size: 0.95rem;
+
+  font-weight: 600;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+.form-upload__file-info span {
+  display: block;
+
+  margin-top: 0.25rem;
+
+  color: #8a93a3;
+
+  font-size: 0.8rem;
+}
+
+
+.form-upload__selected-file button {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 0.35rem;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #7d8795;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   SUBMIT
+========================================================= */
+
+.form-upload__submit {
+  width: 100%;
+
+  min-height: clamp(54px, 6vw, 62px);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 0.7rem;
+
+  margin-top: 0.5rem;
+
+  border: 0;
+
+  border-radius: 15px;
+
+  background: #111317;
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 1rem;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+
+.form-upload__submit:hover:not(:disabled) {
+  background: #252930;
+
+  transform: translateY(-2px);
+}
+
+
+.form-upload__submit:disabled {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   PROCESSING
+========================================================= */
+
+.form-upload__processing {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 1.5rem;
+
+  text-align: center;
+}
+
+
+.form-upload__processing h2 {
+  margin: 0;
+
+  color: #20242b;
+
+  font-size:
+    clamp(1.1rem, 2vw, 1.5rem);
+
+  font-weight: 500;
+}
+
+
+.form-upload__processing-image {
+  width: 100%;
+
+  max-width: 620px;
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 15px 45px rgba(40, 70, 110, 0.08);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .form-upload {
+    padding-top: 6rem;
+  }
+
+  .form-upload__heading {
+    margin-bottom: 2.5rem;
+  }
+
+  .form-upload__field textarea {
+    min-height: 120px;
+  }
+
+  .form-upload__dropzone {
+    min-height: 180px;
+  }
+
+  .form-upload__file-info p {
+    max-width: 220px;
+  }
+
+}

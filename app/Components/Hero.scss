@@ -319,7 +319,7 @@ font-family: 'Inter', sans-serif;;
   font-weight: 400;
 
   line-height: 1;
-
+margin-top: 3px;
   transition: transform 0.2s ease;
 }
 
@@ -440,7 +440,7 @@ font-family: 'Inter', sans-serif;;
      sides shrink together — a fixed left override here previously
      made the strip sit lopsided instead of shrinking symmetrically
      at narrower widths. */
-  margin-inline: clamp(2rem, 8vw, 8rem);
+  margin-inline: clamp(2rem, 8vw, 3rem);
   margin-top: -16px;
   height: 100px;
 

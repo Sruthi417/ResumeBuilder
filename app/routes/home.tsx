@@ -80,7 +80,7 @@ export default function Home() {
 <Testimonials/>
 <Footer/>
 
-        {!loadingResumes && resumes?.length === 0 && (
+        {/* {!loadingResumes && resumes?.length === 0 && (
           <div className="flex flex-col items-center justify-center mt-6">
             <Link
               to="/upload"
@@ -89,7 +89,7 @@ export default function Home() {
               Upload Resume
             </Link>
           </div>
-        )}
+        )} */}
       </section>
     </main>
   );

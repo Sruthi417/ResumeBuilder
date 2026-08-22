@@ -7,6 +7,7 @@ import {
   type Variants,
 } from "framer-motion";
 import "./Hero.scss";
+import { ArrowRight } from "iconsax-react";
 
 const logos = [
   "/redesign/logo1.png",
@@ -17,28 +18,20 @@ const logos = [
 const Hero = () => {
   const heroRef = useRef<HTMLElement | null>(null);
 
-const { scrollYProgress } = useScroll({
-  target: heroRef,
-  offset: ["start start", "end end"],
-});
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end end"],
+  });
 
-const progress = useSpring(scrollYProgress, {
-  stiffness: 90,
-  damping: 28,
-  restDelta: 0.001,
-});
+  const progress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 28,
+    restDelta: 0.001,
+  });
 
-const rotateX = useTransform(
-  progress,
-  [0, 0.85],
-  [14, 0]
-);
+  const rotateX = useTransform(progress, [0, 0.85], [14, 0]);
 
-const scale = useTransform(
-  progress,
-  [0, 0.85],
-  [0.985, 1]
-);
+  const scale = useTransform(progress, [0, 0.85], [0.985, 1]);
 
   const containerVariants: Variants = {
     hidden: {
@@ -102,15 +95,21 @@ const scale = useTransform(
             </motion.div>
 
             <motion.h1 variants={itemVariants}>
-              Build a resume that{" "}
-              <span className="highlight-word">gets</span>{" "}
+              Build a resume that <span className="highlight-word">gets</span>{" "}
               <span className="highlight-word">noticed.</span>
             </motion.h1>
 
             <motion.div className="hero__actions" variants={itemVariants}>
               <a href="/upload" className="hero__primary-button">
                 upload Resume
-                <span aria-hidden="true">→</span>
+                <span>
+                < ArrowRight
+                  size={16}
+                  color="currentColor"
+                  variant="Linear"
+                  aria-hidden="true"
+                />
+                </span>
               </a>
 
               <a href="#how-it-works" className="hero__secondary-button">
@@ -185,7 +184,6 @@ const scale = useTransform(
             initial="hidden"
             animate="show"
           >
-
             <p>
               AI resume insights built to simplify applications and make every
               submission stronger.
@@ -204,15 +202,17 @@ const scale = useTransform(
           DASHBOARD
       ===================================================== */}
 
-      <motion.div className="hero__dashboard-wrapper"
+      <motion.div
+        className="hero__dashboard-wrapper"
         variants={itemVariants}
         initial="hidden"
-        animate="show">
+        animate="show"
+      >
         <motion.div
           className="hero__dashboard"
           style={{
-              rotateX,
-      scale,
+            rotateX,
+            scale,
           }}
         >
           <img

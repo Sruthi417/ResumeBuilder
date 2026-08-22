@@ -143,7 +143,7 @@ const Features = () => {
 
   return (
     <section ref={sectionRef} className="features" id="features">
-      <div className="features__container">
+      <div className="features__container" id="feature">
         {/* =================================================
             LEFT SIDE
         ================================================= */}

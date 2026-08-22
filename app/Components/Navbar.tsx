@@ -38,7 +38,7 @@ const Navbar = ({ uploadedResumes = [] }: NavbarProps) => {
 
         <div className="navbar__links">
           <NavLink
-            to="/features"
+            to="#feature"
             className={({ isActive }) =>
               `navbar__link ${isActive ? "active" : ""}`
             }
@@ -47,13 +47,13 @@ const Navbar = ({ uploadedResumes = [] }: NavbarProps) => {
           </NavLink>
 
           {hasResumes && (
-            <a href="#resumes" className="navbar__link">
+            <a href="#resumes" className="navbar__link active">
               Resumes
             </a>
           )}
 
           <NavLink
-            to="/testimonials"
+            to="#testimonials"
             className={({ isActive }) =>
               `navbar__link ${isActive ? "active" : ""}`
             }

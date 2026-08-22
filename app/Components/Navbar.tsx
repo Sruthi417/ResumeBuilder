@@ -39,6 +39,16 @@ const Navbar = ({ uploadedResumes = [] }: NavbarProps) => {
         </Link>
 
         <div className="navbar__links">
+
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `navbar__link ${isActive ? "active" : ""}`
+            }
+          >
+            Home
+          </NavLink>
+
           <NavLink
             to="#feature"
             className={({ isActive }) =>

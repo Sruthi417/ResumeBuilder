@@ -7,7 +7,7 @@ import OverView from "~/Components/OverView";
 
 import { usePuterStore } from "~/lib/puter";
 
-import "./Resume.scss";
+import "./resume.scss";
 
 export const meta = () => [
   { title: "Resumind | Review" },
